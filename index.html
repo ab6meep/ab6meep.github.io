@@ -3,7 +3,6 @@
 <head>
   <title id="title">angel</title>
 
-  <!-- Favicon -->
   <link rel="icon" href="icon.png" type="image/png">
 
   <style>
@@ -21,19 +20,17 @@
       overflow: hidden;
     }
 
-    /* BLUR EFFECT */
+    /* BLUR */
     .blurred {
       filter: blur(10px);
-      transition: 0.5s ease;
+      transition: 0.6s ease;
     }
 
-    /* INTRO SCREEN */
+    /* INTRO */
     .intro {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       background: black;
       display: flex;
       align-items: center;
@@ -41,8 +38,31 @@
       z-index: 10;
       cursor: pointer;
       font-size: 2rem;
-      color: white;
       text-shadow: 0 0 10px white;
+      animation: pulse 2s infinite;
+      transition: opacity 0.6s ease;
+    }
+
+    .intro.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    /* BANNER */
+    .banner {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 200px;
+      background: url('banner.png') center/cover no-repeat;
+      filter: brightness(0.5);
+      z-index: -1;
     }
 
     /* PROFILE */
@@ -51,18 +71,26 @@
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 15px;
+      margin-top: 80px;
       box-shadow: 0 0 20px #ffb6c1;
+      border: 2px solid #ffb6c1;
     }
 
     .name {
       font-size: 2rem;
       color: #ffb6c1;
       text-shadow: 0 0 10px #ffb6c1;
+      margin-top: 10px;
     }
 
-    .roblox {
-      margin-top: 10px;
+    /* LINKS BOX */
+    .links {
+      margin-top: 15px;
+      padding: 15px 25px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
     }
 
     .roblox img {
@@ -82,27 +110,37 @@
   <!-- INTRO -->
   <div class="intro" onclick="enterSite()">click to enter</div>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <div id="content" class="blurred">
+    
+    <div class="banner"></div>
+
     <img src="pfp.png" class="profile-pic">
     
     <div class="name">Angel</div>
 
-    <div class="roblox">
-      <a href="https://www.roblox.com/users/348101/profile" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.svg">
-      </a>
+    <div class="links">
+      <div class="roblox">
+        <a href="https://www.roblox.com/users/348101/profile" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.svg">
+        </a>
+      </div>
     </div>
+
   </div>
 
   <script>
-    // CLICK TO ENTER
     function enterSite() {
-      document.querySelector(".intro").style.display = "none";
-      document.getElementById("content").classList.remove("blurred");
+      const intro = document.querySelector(".intro");
+      intro.classList.add("fade-out");
+
+      setTimeout(() => {
+        intro.style.display = "none";
+        document.getElementById("content").classList.remove("blurred");
+      }, 600);
     }
 
-    // ANIMATED TITLE
+    // TITLE ANIMATION
     const text = "angelangelangel";
     let i = 0;
 

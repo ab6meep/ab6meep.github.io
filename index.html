@@ -5,25 +5,38 @@
 
   <link rel="icon" href="icon.png" type="image/png">
 
-  <!-- Gotham-style fallback (use your own GothamBlack.ttf if you have it) -->
-  <style>
-    @font-face {
-      font-family: "GothamBlack";
-      src: url("GothamBlack.ttf");
-    }
+  <!-- Source Sans 3 (Black weight) -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@900&display=swap" rel="stylesheet">
 
+  <style>
     body {
       margin: 0;
-      background: black;
-      color: white;
       height: 100vh;
+      overflow: hidden;
+      font-family: 'Source Sans 3', Arial, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      font-family: Arial, sans-serif;
       text-align: center;
-      overflow: hidden;
+      color: white;
+    }
+
+    /* BACKGROUND LAYER */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url("background1.gif") center/cover no-repeat;
+      filter: blur(6px) brightness(0.6);
+      transform: scale(1.05);
+      z-index: -2;
+    }
+
+    /* DARK OVERLAY FOR READABILITY */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: -1;
     }
 
     /* INTRO */
@@ -66,18 +79,15 @@
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 30px;
-      box-shadow: 0 0 20px white;
+      box-shadow: 0 0 20px rgba(255,255,255,0.6);
     }
 
-    /* ANGEL NAME (GOTHAM BLACK STYLE) */
+    /* NAME (Source Sans Black) */
     .name {
-      font-family: "GothamBlack", Arial, sans-serif;
-      font-size: 2.4rem;
+      font-size: 2.5rem;
       font-weight: 900;
-      color: white;
       margin-bottom: 35px;
       letter-spacing: 1px;
-      text-shadow: 0 0 10px rgba(255,255,255,0.25);
     }
 
     /* ROBLOX */
@@ -95,6 +105,10 @@
 </head>
 
 <body>
+
+  <!-- BACKGROUND -->
+  <div class="bg"></div>
+  <div class="overlay"></div>
 
   <!-- INTRO -->
   <div class="intro" onclick="enterSite()">click to enter</div>
@@ -127,7 +141,7 @@
       }, 1200);
     }
 
-    // TITLE TYPE (0.5s per character EXACT)
+    // TITLE TYPE (0.5s per character)
     const fullText = "nighty.wtf";
     let i = 0;
 
@@ -136,7 +150,7 @@
       i++;
 
       if (i <= fullText.length) {
-        setTimeout(typeTitle, 500); // 0.5 seconds per character
+        setTimeout(typeTitle, 500);
       }
     }
 

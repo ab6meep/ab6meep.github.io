@@ -20,11 +20,10 @@
       overflow: hidden;
     }
 
-    /* INTRO */
+    /* INTRO SCREEN */
     .intro {
       position: fixed;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background: black;
       display: flex;
       align-items: center;
@@ -33,80 +32,54 @@
       cursor: pointer;
       font-size: 2rem;
       text-shadow: 0 0 10px white;
-      animation: pulse 2s infinite;
-      transition: opacity 1s ease;
+      transition: opacity 1.2s ease;
     }
 
     .intro.fade-out {
       opacity: 0;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.8; }
-      50% { transform: scale(1.08); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.8; }
-    }
-
-    /* CONTENT (starts hidden) */
+    /* MAIN CONTENT (hidden at start) */
     #content {
-      filter: blur(15px);
       opacity: 0;
-      transition: filter 1s ease, opacity 1s ease;
-      position: relative;
+      filter: blur(12px);
+      transform: translateY(12px);
+      transition: opacity 1.2s ease, filter 1.2s ease, transform 1.2s ease;
     }
 
     #content.visible {
-      filter: blur(0);
       opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
     }
 
-    /* BANNER */
-    .banner {
-      position: absolute;
-      top: -40px;
-      width: 100%;
-      height: 220px;
-      background: url('banner.png') center/cover no-repeat;
-      filter: brightness(0.5);
-      z-index: -1;
-    }
-
-    /* PROFILE */
+    /* PROFILE IMAGE */
     .profile-pic {
       width: 120px;
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      margin-top: 120px;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       box-shadow: 0 0 20px #ffb6c1;
-      border: 2px solid #ffb6c1;
     }
 
+    /* NAME */
     .name {
       font-size: 2rem;
       color: #ffb6c1;
       text-shadow: 0 0 10px #ffb6c1;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
     }
 
-    /* LINKS BOX */
-    .links {
-      padding: 20px 35px;
-      border: 1px solid white;
-      border-radius: 15px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 0 15px rgba(255,255,255,0.1);
-    }
-
+    /* ROBLOX BUTTON */
     .roblox img {
-      width: 32px;
-      filter: drop-shadow(0 0 5px white);
-      transition: 0.25s;
+      width: 42px;
+      transition: 0.25s ease;
+      filter: drop-shadow(0 0 6px white);
     }
 
     .roblox img:hover {
-      transform: scale(1.25);
+      transform: scale(1.2);
     }
 
   </style>
@@ -114,24 +87,20 @@
 
 <body>
 
-  <!-- INTRO -->
+  <!-- CLICK TO ENTER -->
   <div class="intro" onclick="enterSite()">click to enter</div>
 
-  <!-- MAIN CONTENT -->
+  <!-- CONTENT -->
   <div id="content">
-    
-    <div class="banner"></div>
 
     <img src="pfp.png" class="profile-pic">
-    
+
     <div class="name">Angel</div>
 
-    <div class="links">
-      <div class="roblox">
-        <a href="https://www.roblox.com/users/348101/profile" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.svg">
-        </a>
-      </div>
+    <div class="roblox">
+      <a href="https://www.roblox.com/users/348101/profile" target="_blank">
+        <img src="robloxbutton.png" alt="Roblox">
+      </a>
     </div>
 
   </div>
@@ -141,17 +110,15 @@
       const intro = document.querySelector(".intro");
       const content = document.getElementById("content");
 
-      // start animations together
       intro.classList.add("fade-out");
       content.classList.add("visible");
 
-      // remove intro after fade
       setTimeout(() => {
         intro.style.display = "none";
-      }, 1000);
+      }, 1200);
     }
 
-    // TITLE ANIMATION
+    // Animated title
     const text = "angelangelangel";
     let i = 0;
 

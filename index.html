@@ -21,9 +21,15 @@
     }
 
     /* BLUR */
-    .blurred {
+    #content {
       filter: blur(10px);
-      transition: 0.6s ease;
+      transition: filter 0.8s ease, opacity 0.8s ease;
+      opacity: 0.6;
+    }
+
+    #content.visible {
+      filter: blur(0);
+      opacity: 1;
     }
 
     /* INTRO */
@@ -40,17 +46,16 @@
       font-size: 2rem;
       text-shadow: 0 0 10px white;
       animation: pulse 2s infinite;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.8s ease;
     }
 
     .intro.fade-out {
       opacity: 0;
-      pointer-events: none;
     }
 
     @keyframes pulse {
       0% { transform: scale(1); opacity: 0.8; }
-      50% { transform: scale(1.05); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 1; }
       100% { transform: scale(1); opacity: 0.8; }
     }
 
@@ -59,7 +64,7 @@
       position: absolute;
       top: 0;
       width: 100%;
-      height: 200px;
+      height: 220px;
       background: url('banner.png') center/cover no-repeat;
       filter: brightness(0.5);
       z-index: -1;
@@ -71,7 +76,8 @@
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      margin-top: 80px;
+      margin-top: 100px;
+      margin-bottom: 20px;
       box-shadow: 0 0 20px #ffb6c1;
       border: 2px solid #ffb6c1;
     }
@@ -80,28 +86,29 @@
       font-size: 2rem;
       color: #ffb6c1;
       text-shadow: 0 0 10px #ffb6c1;
-      margin-top: 10px;
+      margin-bottom: 25px;
     }
 
     /* LINKS BOX */
     .links {
-      margin-top: 15px;
-      padding: 15px 25px;
-      border: 1px solid rgba(255,255,255,0.2);
+      padding: 20px 30px;
+      border: 1px solid white;
       border-radius: 15px;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(6px);
       box-shadow: 0 0 15px rgba(255,255,255,0.1);
+      margin-top: 10px;
     }
 
     .roblox img {
       width: 30px;
       filter: drop-shadow(0 0 5px white);
-      transition: 0.2s;
+      transition: 0.25s;
     }
 
     .roblox img:hover {
-      transform: scale(1.2);
+      transform: scale(1.25);
     }
+
   </style>
 </head>
 
@@ -111,7 +118,7 @@
   <div class="intro" onclick="enterSite()">click to enter</div>
 
   <!-- MAIN -->
-  <div id="content" class="blurred">
+  <div id="content">
     
     <div class="banner"></div>
 
@@ -132,12 +139,14 @@
   <script>
     function enterSite() {
       const intro = document.querySelector(".intro");
+      const content = document.getElementById("content");
+
       intro.classList.add("fade-out");
+      content.classList.add("visible");
 
       setTimeout(() => {
         intro.style.display = "none";
-        document.getElementById("content").classList.remove("blurred");
-      }, 600);
+      }, 800);
     }
 
     // TITLE ANIMATION

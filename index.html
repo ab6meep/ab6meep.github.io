@@ -5,6 +5,9 @@
 
   <link rel="icon" href="icon.png" type="image/png">
 
+  <!-- CARTOONY FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
@@ -20,7 +23,7 @@
       overflow: hidden;
     }
 
-    /* INTRO SCREEN */
+    /* INTRO */
     .intro {
       position: fixed;
       inset: 0;
@@ -39,7 +42,7 @@
       opacity: 0;
     }
 
-    /* MAIN CONTENT */
+    /* CONTENT */
     #content {
       opacity: 0;
       filter: blur(12px);
@@ -53,7 +56,7 @@
       transform: translateY(0);
     }
 
-    /* PROFILE IMAGE */
+    /* PROFILE */
     .profile-pic {
       width: 120px;
       height: 120px;
@@ -63,15 +66,24 @@
       box-shadow: 0 0 20px white;
     }
 
-    /* NAME */
+    /* CARTOONY NAME */
     .name {
-      font-size: 2rem;
-      font-weight: bold;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 600;
       color: white;
       margin-bottom: 35px;
+
+      /* cartoony outline */
+      -webkit-text-stroke: 1.5px black;
+
+      /* soft pop shadow */
+      text-shadow:
+        2px 2px 0px black,
+        0 0 10px rgba(255,255,255,0.3);
     }
 
-    /* ROBLOX BUTTON */
+    /* ROBLOX */
     .roblox img {
       width: 42px;
       transition: 0.25s ease;
@@ -87,7 +99,7 @@
 
 <body>
 
-  <!-- CLICK TO ENTER -->
+  <!-- INTRO -->
   <div class="intro" onclick="enterSite()">click to enter</div>
 
   <!-- CONTENT -->
@@ -118,37 +130,31 @@
       }, 1200);
     }
 
-    // TYPE + DELETE TITLE EFFECT
+    // SMOOTH TYPE + DELETE (letter-by-letter)
     const fullText = "nighty.wtf";
-    let current = "";
-    let i = 0;
+    let index = 0;
     let deleting = false;
 
     function animateTitle() {
       if (!deleting) {
-        // typing forward
-        current = fullText.substring(0, i + 1);
-        i++;
+        index++;
+        document.title = fullText.substring(0, index);
 
-        if (i === fullText.length) {
+        if (index === fullText.length) {
           deleting = true;
-          setTimeout(animateTitle, 1200); // pause at full text
-          document.title = current;
+          setTimeout(animateTitle, 1200); // pause at full
           return;
         }
       } else {
-        // deleting backward
-        current = fullText.substring(0, i - 1);
-        i--;
+        index--;
+        document.title = fullText.substring(0, index);
 
-        if (i === 0) {
+        if (index === 0) {
           deleting = false;
         }
       }
 
-      document.title = current;
-
-      setTimeout(animateTitle, deleting ? 80 : 120);
+      setTimeout(animateTitle, deleting ? 70 : 110);
     }
 
     animateTitle();

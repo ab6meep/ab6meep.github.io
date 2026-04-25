@@ -63,7 +63,7 @@
       box-shadow: 0 0 20px white;
     }
 
-    /* NAME (UPDATED) */
+    /* NAME */
     .name {
       font-size: 2rem;
       font-weight: bold;
@@ -118,27 +118,40 @@
       }, 1200);
     }
 
-    // CUSTOM TITLE SEQUENCE
-    const titles = [
-      "n",
-      "ni",
-      "nig",
-      "nigh",
-      "night",
-      "nighty",
-      "nighty.d",
-      "nighty.w",
-      "nighty.wt",
-      "nighty.wtf"
-    ];
+    // TYPE + DELETE TITLE EFFECT
+    const fullText = "nighty.wtf";
+    let current = "";
+    let i = 0;
+    let deleting = false;
 
-    let index = 0;
+    function animateTitle() {
+      if (!deleting) {
+        // typing forward
+        current = fullText.substring(0, i + 1);
+        i++;
 
-    setInterval(() => {
-      document.title = titles[index];
-      index++;
-      if (index >= titles.length) index = 0;
-    }, 300);
+        if (i === fullText.length) {
+          deleting = true;
+          setTimeout(animateTitle, 1200); // pause at full text
+          document.title = current;
+          return;
+        }
+      } else {
+        // deleting backward
+        current = fullText.substring(0, i - 1);
+        i--;
+
+        if (i === 0) {
+          deleting = false;
+        }
+      }
+
+      document.title = current;
+
+      setTimeout(animateTitle, deleting ? 80 : 120);
+    }
+
+    animateTitle();
   </script>
 
 </body>

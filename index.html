@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title id="title">angel</title>
+  <title id="title">n</title>
 
   <link rel="icon" href="icon.png" type="image/png">
 
@@ -39,7 +39,7 @@
       opacity: 0;
     }
 
-    /* MAIN CONTENT (hidden at start) */
+    /* MAIN CONTENT */
     #content {
       opacity: 0;
       filter: blur(12px);
@@ -60,14 +60,14 @@
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 30px;
-      box-shadow: 0 0 20px #ffb6c1;
+      box-shadow: 0 0 20px white;
     }
 
-    /* NAME */
+    /* NAME (UPDATED) */
     .name {
       font-size: 2rem;
-      color: #ffb6c1;
-      text-shadow: 0 0 10px #ffb6c1;
+      font-weight: bold;
+      color: white;
       margin-bottom: 35px;
     }
 
@@ -118,15 +118,27 @@
       }, 1200);
     }
 
-    // Animated title
-    const text = "angelangelangel";
-    let i = 0;
+    // CUSTOM TITLE SEQUENCE
+    const titles = [
+      "n",
+      "ni",
+      "nig",
+      "nigh",
+      "night",
+      "nighty",
+      "nighty.d",
+      "nighty.w",
+      "nighty.wt",
+      "nighty.wtf"
+    ];
+
+    let index = 0;
 
     setInterval(() => {
-      document.title = text.substring(0, i);
-      i++;
-      if (i > text.length) i = 0;
-    }, 200);
+      document.title = titles[index];
+      index++;
+      if (index >= titles.length) index = 0;
+    }, 300);
   </script>
 
 </body>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>angelangelangelangel</title>
+  <title id="title">angel</title>
 
-  <!-- Favicon (tab icon) -->
+  <!-- Favicon -->
   <link rel="icon" href="icon.png" type="image/png">
 
   <style>
@@ -18,27 +18,100 @@
       flex-direction: column;
       font-family: Arial, sans-serif;
       text-align: center;
+      overflow: hidden;
     }
 
-    .main {
-      font-size: 2.5rem;
-      color: #ffb6c1; /* light pink */
-      text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ffb6c1;
+    /* BLUR EFFECT */
+    .blurred {
+      filter: blur(10px);
+      transition: 0.5s ease;
     }
 
-    .sub {
-      font-size: 0.9rem;
-      margin-top: 10px;
+    /* INTRO SCREEN */
+    .intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      cursor: pointer;
+      font-size: 2rem;
       color: white;
-      text-shadow: 0 0 8px white, 0 0 16px white;
+      text-shadow: 0 0 10px white;
+    }
+
+    /* PROFILE */
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      box-shadow: 0 0 20px #ffb6c1;
+    }
+
+    .name {
+      font-size: 2rem;
+      color: #ffb6c1;
+      text-shadow: 0 0 10px #ffb6c1;
+    }
+
+    .roblox {
+      margin-top: 10px;
+    }
+
+    .roblox img {
+      width: 30px;
+      filter: drop-shadow(0 0 5px white);
+      transition: 0.2s;
+    }
+
+    .roblox img:hover {
+      transform: scale(1.2);
     }
   </style>
 </head>
 
 <body>
 
-  <div class="main">coming soon</div>
-  <div class="sub">whenever im not lazy - angel</div>
+  <!-- INTRO -->
+  <div class="intro" onclick="enterSite()">click to enter</div>
+
+  <!-- MAIN CONTENT -->
+  <div id="content" class="blurred">
+    <img src="pfp.png" class="profile-pic">
+    
+    <div class="name">Angel</div>
+
+    <div class="roblox">
+      <a href="https://www.roblox.com/users/YOURID/profile" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.svg">
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // CLICK TO ENTER
+    function enterSite() {
+      document.querySelector(".intro").style.display = "none";
+      document.getElementById("content").classList.remove("blurred");
+    }
+
+    // ANIMATED TITLE
+    const text = "angelangelangel";
+    let i = 0;
+
+    setInterval(() => {
+      document.title = text.substring(0, i);
+      i++;
+      if (i > text.length) i = 0;
+    }, 200);
+  </script>
 
 </body>
 </html>

@@ -5,7 +5,6 @@
 
   <link rel="icon" href="icon.png" type="image/png">
 
-  <!-- Source Sans 3 (Black weight) -->
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@900&display=swap" rel="stylesheet">
 
   <style>
@@ -21,7 +20,7 @@
       color: white;
     }
 
-    /* BACKGROUND LAYER */
+    /* BACKGROUND */
     .bg {
       position: fixed;
       inset: 0;
@@ -31,7 +30,6 @@
       z-index: -2;
     }
 
-    /* DARK OVERLAY FOR READABILITY */
     .overlay {
       position: fixed;
       inset: 0;
@@ -39,11 +37,11 @@
       z-index: -1;
     }
 
-    /* INTRO */
+    /* INTRO (NOW SLIGHTLY TRANSPARENT) */
     .intro {
       position: fixed;
       inset: 0;
-      background: black;
+      background: rgba(0, 0, 0, 0.85); /* 👈 changed */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -78,15 +76,15 @@
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 30px;
+      margin-bottom: 15px; /* tighter */
       box-shadow: 0 0 20px rgba(255,255,255,0.6);
     }
 
-    /* NAME (Source Sans Black) */
+    /* NAME */
     .name {
       font-size: 2.5rem;
       font-weight: 900;
-      margin-bottom: 35px;
+      margin-bottom: 18px; /* tighter */
       letter-spacing: 1px;
     }
 

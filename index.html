@@ -1,63 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>enter</title>
-
+  <title></title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
     body {
+      margin: 0;
       background: black;
-      color: white;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .enter {
-      font-size: 2rem;
-      letter-spacing: 4px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .enter:hover {
-      opacity: 0.6;
-      transform: scale(1.1);
-    }
-
-    .fade-out {
-      animation: fadeOut 1s forwards;
-    }
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-      }
     }
   </style>
 </head>
-
 <body>
-
-  <div class="enter" onclick="enterSite()">CLICK TO ENTER</div>
-
-  <script>
-    function enterSite() {
-      document.body.classList.add("fade-out");
-
-      setTimeout(() => {
-        window.location.href = "home.html";
-      }, 1000);
-    }
-  </script>
-
 </body>
 </html>

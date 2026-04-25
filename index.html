@@ -5,10 +5,13 @@
 
   <link rel="icon" href="icon.png" type="image/png">
 
-  <!-- CARTOONY FONT -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
-
+  <!-- Gotham-style fallback (use your own GothamBlack.ttf if you have it) -->
   <style>
+    @font-face {
+      font-family: "GothamBlack";
+      src: url("GothamBlack.ttf");
+    }
+
     body {
       margin: 0;
       background: black;
@@ -66,21 +69,15 @@
       box-shadow: 0 0 20px white;
     }
 
-    /* CARTOONY NAME */
+    /* ANGEL NAME (GOTHAM BLACK STYLE) */
     .name {
-      font-family: 'Fredoka', sans-serif;
+      font-family: "GothamBlack", Arial, sans-serif;
       font-size: 2.4rem;
-      font-weight: 600;
+      font-weight: 900;
       color: white;
       margin-bottom: 35px;
-
-      /* cartoony outline */
-      -webkit-text-stroke: 1.5px black;
-
-      /* soft pop shadow */
-      text-shadow:
-        2px 2px 0px black,
-        0 0 10px rgba(255,255,255,0.3);
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.25);
     }
 
     /* ROBLOX */
@@ -130,34 +127,20 @@
       }, 1200);
     }
 
-    // SMOOTH TYPE + DELETE (letter-by-letter)
+    // TITLE TYPE (0.5s per character EXACT)
     const fullText = "nighty.wtf";
-    let index = 0;
-    let deleting = false;
+    let i = 0;
 
-    function animateTitle() {
-      if (!deleting) {
-        index++;
-        document.title = fullText.substring(0, index);
+    function typeTitle() {
+      document.title = fullText.substring(0, i);
+      i++;
 
-        if (index === fullText.length) {
-          deleting = true;
-          setTimeout(animateTitle, 1200); // pause at full
-          return;
-        }
-      } else {
-        index--;
-        document.title = fullText.substring(0, index);
-
-        if (index === 0) {
-          deleting = false;
-        }
+      if (i <= fullText.length) {
+        setTimeout(typeTitle, 500); // 0.5 seconds per character
       }
-
-      setTimeout(animateTitle, deleting ? 70 : 110);
     }
 
-    animateTitle();
+    typeTitle();
   </script>
 
 </body>

@@ -49,7 +49,6 @@
 
       filter: blur(40px);
       opacity: 0.9;
-
       animation: fogDrift 20s ease-in-out infinite;
     }
 
@@ -98,6 +97,10 @@
       transform: translateY(0);
     }
 
+    /* =========================
+       🔳 DOUBLE OUTLINE SYSTEM
+       ========================= */
+
     /* VIEW COUNTER */
     .view-counter {
       display: flex;
@@ -107,21 +110,23 @@
       margin-bottom: 12px;
 
       padding: 6px 10px;
-      border-radius: 14px;
+      border-radius: 16px;
 
-      /* 🪟 more transparent glass */
-      background: rgba(0,0,0,0.18);
+      /* ultra transparent */
+      background: rgba(0,0,0,0.10);
 
-      /* 💗 inner pink border + 🤍 outer white glow */
+      /* pink inner border */
       border: 1px solid rgba(255, 170, 210, 0.45);
 
+      /* white outer ring */
       box-shadow:
-        0 0 0 1px rgba(255,255,255,0.18),   /* outer white outline */
-        0 0 18px rgba(255,255,255,0.08);    /* soft white glow */
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 14px rgba(255,255,255,0.08);
+
+      backdrop-filter: blur(12px);
 
       color: rgba(255,255,255,0.75);
       font-size: 0.85rem;
-      backdrop-filter: blur(10px);
     }
 
     .view-counter img {
@@ -129,7 +134,7 @@
       height: 16px;
     }
 
-    /* CARD */
+    /* CARD (PROFILE FRAME) */
     .card {
       display: flex;
       flex-direction: column;
@@ -137,23 +142,22 @@
       gap: 22px;
 
       padding: 24px 36px;
-      border-radius: 36px;
+      border-radius: 38px;
 
-      /* 🪟 more transparent */
-      background: rgba(0,0,0,0.18);
+      /* almost invisible inside */
+      background: rgba(0,0,0,0.12);
 
-      /* 💗 pink border */
-      border: 1px solid rgba(255, 170, 210, 0.45);
+      /* pink inner outline */
+      border: 1px solid rgba(255, 170, 210, 0.50);
 
-      /* 🤍 outer white outline + soft glow */
+      /* white outer ring + glow separation */
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
-        0 0 22px rgba(255,255,255,0.10),
+        0 0 16px rgba(255,255,255,0.10),
 
-        0 0 18px rgba(255, 170, 210, 0.12),
-        0 0 40px rgba(255, 170, 210, 0.08);
+        0 0 18px rgba(255, 170, 210, 0.10);
 
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(14px);
 
       animation: float 6s ease-in-out infinite;
     }
@@ -164,7 +168,7 @@
       100% { transform: translateY(0px); }
     }
 
-    /* PFP */
+    /* PFP + PINK RING */
     .pfp-wrap {
       position: relative;
       width: 95px;
@@ -177,15 +181,16 @@
     .pfp-wrap::after {
       content: "";
       position: absolute;
-      inset: -6px;
+      inset: -7px;
       border-radius: 50%;
 
       border: 1px solid rgba(255, 170, 210, 0.55);
 
       box-shadow:
-        0 0 10px rgba(255, 170, 210, 0.25),
-        0 0 22px rgba(255, 170, 210, 0.18),
-        inset 0 0 10px rgba(255, 170, 210, 0.12);
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 14px rgba(255,255,255,0.10),
+
+        0 0 16px rgba(255, 170, 210, 0.20);
 
       animation: ringSpin 10s linear infinite;
     }
@@ -207,13 +212,11 @@
     @keyframes glowPulse {
       0%, 100% {
         box-shadow:
-          0 0 16px rgba(255, 170, 210, 0.25),
-          0 0 30px rgba(255, 170, 210, 0.18);
+          0 0 14px rgba(255, 170, 210, 0.20);
       }
       50% {
         box-shadow:
-          0 0 26px rgba(255, 170, 210, 0.35),
-          0 0 55px rgba(255, 170, 210, 0.22);
+          0 0 24px rgba(255, 170, 210, 0.30);
       }
     }
 
@@ -261,9 +264,15 @@
     .roblox img,
     .discord img {
       width: 30px;
-      border: 1px solid rgba(255, 170, 210, 0.45);
       border-radius: 10px;
       padding: 4px;
+
+      border: 1px solid rgba(255, 170, 210, 0.45);
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 10px rgba(255,255,255,0.08);
+
       transition: 0.2s;
     }
 
@@ -274,7 +283,6 @@
 
     .discord {
       position: relative;
-      display: inline-block;
       z-index: 9999;
     }
 
@@ -284,10 +292,7 @@
       bottom: -28px;
       left: 50%;
       transform: translateX(-50%);
-      white-space: nowrap;
-
       font-size: 0.7rem;
-      color: rgba(255,255,255,0.9);
 
       background: rgba(0,0,0,0.45);
       padding: 3px 7px;
@@ -310,25 +315,24 @@
 
       margin-top: 14px;
 
-      padding: 4px 8px;
-      border-radius: 12px;
+      padding: 6px 10px;
+      border-radius: 14px;
 
-      background: rgba(0,0,0,0.18);
+      background: rgba(0,0,0,0.10);
 
       border: 1px solid rgba(255, 170, 210, 0.45);
 
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
-        0 0 18px rgba(255,255,255,0.08);
+        0 0 12px rgba(255,255,255,0.08);
 
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
 
     .volume-wrap img {
       width: 12px;
       height: 12px;
       filter: brightness(0) invert(1);
-      opacity: 0.9;
     }
 
     input[type="range"] {
@@ -339,7 +343,6 @@
       background: rgba(255, 170, 210, 0.4);
       border-radius: 999px;
       outline: none;
-      cursor: pointer;
     }
 
     input[type="range"]::-webkit-slider-thumb {
@@ -348,14 +351,6 @@
       height: 8px;
       border-radius: 50%;
       background: #ffd1e8;
-    }
-
-    input[type="range"]::-moz-range-thumb {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ffd1e8;
-      border: none;
     }
 
     .hidden {
@@ -410,7 +405,7 @@
       </div>
 
       <div class="discord">
-        <a href="#" target="_blank">
+        <a href="#">
           <img src="discordbutton.png">
         </a>
       </div>

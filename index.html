@@ -34,17 +34,20 @@
       z-index: -1;
     }
 
+    /* INTRO (clean black, no border) */
     .intro {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.85);
+      background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 10;
+      z-index: 50;
+
       cursor: pointer;
       font-size: 2rem;
-      border: 1px solid rgba(255,255,255,0.25);
+      color: white;
+
       transition: opacity 1.2s ease;
     }
 
@@ -152,24 +155,18 @@
       font-weight: 900;
     }
 
-    .cursor {
-      animation: blink 1s infinite;
-    }
+    .cursor { animation: blink 1s infinite; }
 
     @keyframes blink {
       0%,100%{opacity:1;}
       50%{opacity:0;}
     }
 
-    .badge img {
-      width: 20px;
-    }
+    .badge img { width: 20px; }
 
-    .handle {
-      color: rgba(255,255,255,0.75);
-    }
+    .handle { color: rgba(255,255,255,0.75); }
 
-    /* BUTTONS ROW (clean layout) */
+    /* BUTTONS */
     .links {
       display: flex;
       gap: 10px;
@@ -190,10 +187,11 @@
       transform: scale(1.15);
     }
 
-    /* DISCORD HOVER TEXT */
+    /* DISCORD HOVER (FORCED ABOVE EVERYTHING) */
     .discord {
       position: relative;
       display: inline-block;
+      z-index: 9999;
     }
 
     .discord::after {
@@ -205,15 +203,17 @@
       white-space: nowrap;
 
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255,255,255,0.9);
 
-      background: rgba(0,0,0,0.35);
+      background: rgba(0,0,0,0.45);
       padding: 4px 8px;
       border-radius: 6px;
 
       opacity: 0;
       pointer-events: none;
       transition: 0.2s ease;
+
+      z-index: 99999;
     }
 
     .discord:hover::after {
@@ -231,9 +231,10 @@
       display: none;
       color: white;
       cursor: pointer;
+      z-index: 30;
     }
 
-    /* VIEW COUNTER */
+    /* VIEW COUNTER (BEHIND INTRO) */
     .view-counter {
       position: fixed;
       bottom: 18px;
@@ -253,7 +254,7 @@
       font-size: 0.85rem;
 
       backdrop-filter: blur(6px);
-      z-index: 20;
+      z-index: 1; /* hidden under intro */
     }
 
     .view-counter img {
@@ -292,7 +293,6 @@
       </div>
     </div>
 
-    <!-- CLEAN LINKS ROW -->
     <div class="links">
 
       <div class="roblox">
@@ -312,9 +312,8 @@
   </div>
 </div>
 
-<!-- VIEW COUNTER -->
 <div class="view-counter">
-  <img src="viewcounter.png" alt="views">
+  <img src="viewcounter.png">
   <span>[DISABLED]</span>
 </div>
 

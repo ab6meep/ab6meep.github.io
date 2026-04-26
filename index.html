@@ -83,7 +83,7 @@
       margin-right: auto;
     }
 
-    /* NAME + BADGE */
+    /* NAME + GLOW */
     .name-row {
       display: flex;
       align-items: center;
@@ -96,13 +96,20 @@
       font-size: 2.5rem;
       font-weight: 900;
       letter-spacing: 1px;
+      color: white;
+
+      text-shadow:
+        0 0 6px rgba(255,255,255,0.35),
+        0 0 12px rgba(255,255,255,0.25),
+        0 0 24px rgba(255,255,255,0.15);
     }
 
+    /* BADGE */
     .badge img {
       width: 26px;
     }
 
-    /* BUTTON */
+    /* ROBLOX BUTTON */
     .roblox img {
       width: 42px;
       transition: 0.25s ease;
@@ -113,7 +120,7 @@
       transform: scale(1.2);
     }
 
-    /* AUDIO BUTTON (TOP RIGHT, hidden until enter) */
+    /* AUDIO BUTTON */
     .audio-btn {
       position: fixed;
       top: 20px;
@@ -176,11 +183,11 @@
       intro.classList.add("fade-out");
       content.classList.add("visible");
 
-      // start rain (quieter)
+      // start rain (quiet)
       rain.volume = 0.2;
       rain.play();
 
-      // show audio button AFTER enter
+      // show audio button
       btn.style.display = "block";
 
       setTimeout(() => {
@@ -201,7 +208,7 @@
       }
     }
 
-    /* TITLE TYPE (1 letter per second + reverse) */
+    /* TITLE TYPE + REVERSE (1 letter per second) */
     const text = "nighty.wtf";
     let i = 0;
     let forward = true;

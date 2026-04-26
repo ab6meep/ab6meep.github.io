@@ -17,7 +17,6 @@
       align-items: center;
       justify-content: center;
       color: white;
-      text-align: left;
     }
 
     .bg {
@@ -49,6 +48,9 @@
       font-weight: 400;
       text-shadow: 0 0 10px white;
       transition: opacity 1.2s ease;
+
+      /* BUTTON OUTLINE */
+      border: 1px solid rgba(255,255,255,0.25);
     }
 
     .intro.fade-out {
@@ -59,7 +61,7 @@
       opacity: 0;
       filter: blur(12px);
       transform: translateY(10px);
-      transition: opacity 1.2s ease, filter 1.2s ease, transform 1.2s ease;
+      transition: 1.2s ease;
     }
 
     #content.visible {
@@ -68,21 +70,16 @@
       transform: translateY(0);
     }
 
-    /* ✨ NEW FRAME */
     .card {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 18px;
-
       padding: 22px 28px;
       border-radius: 18px;
-
-      background: rgba(255,255,255,0.06); /* barely transparent */
+      background: rgba(255,255,255,0.06);
       backdrop-filter: blur(10px);
-
       border: 1px solid rgba(255,255,255,0.12);
-
       box-shadow:
         0 0 25px rgba(0,0,0,0.35),
         inset 0 0 20px rgba(255,255,255,0.04);
@@ -99,15 +96,12 @@
       height: 95px;
       border-radius: 50%;
       object-fit: cover;
-
       border: 2px solid rgba(255,255,255,0.85);
-
       box-shadow:
         0 0 20px rgba(255,255,255,0.9),
         0 0 40px rgba(255,255,255,0.7),
         0 0 70px rgba(255,255,255,0.45),
         0 0 110px rgba(255,255,255,0.25);
-
       transition: 0.3s ease;
     }
 
@@ -139,6 +133,17 @@
         0 0 12px rgba(255,255,255,0.25);
     }
 
+    .cursor {
+      display: inline-block;
+      margin-left: 2px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
+    }
+
     .badge img {
       width: 20px;
       filter: drop-shadow(0 0 5px rgba(255,255,255,0.25));
@@ -147,13 +152,16 @@
     .handle {
       font-size: 1rem;
       color: rgba(255,255,255,0.75);
-      letter-spacing: 0.3px;
     }
 
+    /* BUTTON OUTLINE ADDED */
     .roblox img {
       width: 38px;
       filter: drop-shadow(0 0 6px white);
       transition: 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 8px;
+      padding: 4px;
     }
 
     .roblox img:hover {
@@ -167,11 +175,12 @@
       padding: 8px 12px;
       background: rgba(0,0,0,0.25);
       color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
       border-radius: 10px;
       display: none;
+
+      /* BUTTON OUTLINE */
+      border: 1px solid rgba(255,255,255,0.25);
+      cursor: pointer;
     }
   </style>
 </head>
@@ -186,27 +195,22 @@
   <audio id="rain" src="rain.mp3" loop></audio>
 
   <div id="content">
-
-    <!-- FRAME WRAPPER -->
     <div class="card">
 
       <div class="profile-row">
-
         <img src="pfp.png" class="profile-pic">
 
         <div class="info">
-
           <div class="name-line">
-            <div class="name">Angel</div>
+            <div class="name" id="typedName"></div>
+            <span class="cursor">|</span>
             <div class="badge">
               <img src="badge1.gif">
             </div>
           </div>
 
           <div class="handle">.nighty_</div>
-
         </div>
-
       </div>
 
       <div class="roblox">
@@ -216,7 +220,6 @@
       </div>
 
     </div>
-
   </div>
 
   <button class="audio-btn" onclick="toggleAudio()">mute</button>
@@ -239,6 +242,8 @@
       setTimeout(() => {
         intro.style.display = "none";
       }, 1200);
+
+      startTyping(); // start name typing on enter
     }
 
     function toggleAudio() {
@@ -254,6 +259,7 @@
       }
     }
 
+    /* TITLE ANIMATION */
     const text = "@Nighty.wtf";
     let i = 1;
     let forward = true;
@@ -262,7 +268,6 @@
       if (forward) {
         i++;
         document.title = text.substring(0, i);
-
         if (i === text.length) {
           forward = false;
           setTimeout(animateTitle, 1000);
@@ -271,18 +276,31 @@
       } else {
         i--;
         document.title = text.substring(0, i);
-
         if (i === 1) {
           forward = true;
           setTimeout(animateTitle, 1000);
           return;
         }
       }
-
       setTimeout(animateTitle, 1000);
     }
-
     animateTitle();
+
+    /* NAME TYPEWRITER */
+    const nameText = "Angel";
+    let ni = 0;
+
+    function startTyping() {
+      const el = document.getElementById("typedName");
+      function type() {
+        if (ni < nameText.length) {
+          el.textContent += nameText.charAt(ni);
+          ni++;
+          setTimeout(type, 120);
+        }
+      }
+      type();
+    }
   </script>
 
 </body>

@@ -70,17 +70,47 @@
       transform: translateY(0);
     }
 
-    /* PROFILE IMAGE (no frame now) */
+    /* TOP ROW (PFP + BADGES) */
+    .top-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    /* PROFILE IMAGE */
     .profile-pic {
       width: 120px;
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 15px;
       box-shadow: 0 0 20px rgba(255,255,255,0.6);
     }
 
-    /* NAME (no frame now) */
+    /* BADGES FRAME */
+    .badges-frame {
+      display: flex;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.15);
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      align-items: center;
+    }
+
+    .badges-frame img {
+      width: 28px;
+      height: 28px;
+      transition: 0.2s ease;
+    }
+
+    .badges-frame img:hover {
+      transform: scale(1.2);
+    }
+
+    /* NAME */
     .name {
       font-size: 2.5rem;
       font-weight: 900;
@@ -88,16 +118,15 @@
       margin-bottom: 20px;
     }
 
-    /* BUTTON FRAME (ONLY ONE LEFT) */
+    /* BUTTON FRAME */
     .button-frame {
-      padding: 6px 18px; /* thinner vertically */
-      border: 1px solid rgba(255,255,255,0.25); /* lighter border */
-      background: rgba(0,0,0,0.15); /* more transparent */
+      padding: 6px 18px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.15);
       border-radius: 14px;
       backdrop-filter: blur(6px);
     }
 
-    /* ROBLOX */
     .roblox img {
       width: 42px;
       transition: 0.25s ease;
@@ -123,11 +152,22 @@
   <!-- CONTENT -->
   <div id="content">
 
-    <img src="pfp.png" class="profile-pic">
+    <!-- PFP + BADGES -->
+    <div class="top-row">
+
+      <img src="pfp.png" class="profile-pic">
+
+      <div class="badges-frame">
+        <img src="badge1.png" alt="">
+        <img src="badge2.png" alt="">
+        <img src="badge3.png" alt="">
+      </div>
+
+    </div>
 
     <div class="name">Angel</div>
 
-    <!-- ONLY FRAME LEFT -->
+    <!-- BUTTON -->
     <div class="button-frame">
       <div class="roblox">
         <a href="https://www.roblox.com/users/348101/profile" target="_blank">

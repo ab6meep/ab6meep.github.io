@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Nighty's bio</title>
 
   <link rel="icon" href="icon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap" rel="stylesheet">
@@ -12,10 +12,16 @@
       height: 100vh;
       overflow: hidden;
       font-family: 'Source Sans 3', Arial, sans-serif;
+      color: white;
+    }
+
+    /* FIXED CENTER FRAME */
+    .frame {
+      position: fixed;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
     }
 
     /* BACKGROUND */
@@ -35,15 +41,18 @@
       z-index: -3;
     }
 
+    /* FOG */
     .fog {
       position: fixed;
       inset: 0;
       z-index: -2;
       pointer-events: none;
+
       background:
         radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 40%),
         radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05), transparent 45%),
         radial-gradient(circle at 40% 80%, rgba(255,255,255,0.04), transparent 50%);
+
       filter: blur(40px);
       opacity: 0.9;
       animation: fogDrift 20s ease-in-out infinite;
@@ -55,7 +64,7 @@
       100% { transform: translate(0px, 0px); }
     }
 
-    /* RAIN */
+    /* SIDE RAIN */
     .rain-side {
       position: fixed;
       top: 0;
@@ -74,6 +83,7 @@
       width: 2px;
       height: 14px;
       background: rgba(255,255,255,0.6);
+      opacity: 0.6;
       animation: fall linear infinite;
       border-radius: 999px;
     }
@@ -101,16 +111,18 @@
 
     .intro.fade-out { opacity: 0; }
 
-    /* MAIN WRAPPER */
+    /* CONTENT WRAPPER FIX */
     #content {
       opacity: 0;
       filter: blur(12px);
       transform: translateY(10px);
       transition: 1.2s ease;
+
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 18px;
+
+      width: 100%;
     }
 
     #content.visible {
@@ -119,46 +131,47 @@
       transform: translateY(0);
     }
 
-    /* 🔷 VIEW COUNTER FRAME (separate box) */
+    /* VIEW COUNTER */
     .view-counter {
       display: flex;
       align-items: center;
       gap: 8px;
+      margin-bottom: 18px;
 
       padding: 6px 10px;
-      border-radius: 14px;
-
-      background: rgba(0,0,0,0.15);
+      border-radius: 16px;
+      background: rgba(0,0,0,0.10);
       border: 1px solid rgba(255, 170, 210, 0.45);
-
-      box-shadow:
-        0 0 10px rgba(0,0,0,0.4),
-        0 0 14px rgba(255, 170, 210, 0.12);
-
-      backdrop-filter: blur(10px);
-
+      backdrop-filter: blur(12px);
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.75);
     }
 
-    /* 🔷 MAIN CARD FRAME (center) */
+    .view-counter img {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* FIXED CARD SIZE (THIS IS THE IMPORTANT PART) */
     .card {
+      width: 360px;          /* <<< stops giant stretching */
+      max-width: 90vw;       /* responsive safety */
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 22px;
 
-      padding: 24px 36px;
+      padding: 24px 30px;
       border-radius: 38px;
 
-      background: rgba(0,0,0,0.18);
-      border: 1px solid rgba(255, 170, 210, 0.55);
+      background: rgba(0,0,0,0.12);
+      border: 1px solid rgba(255, 170, 210, 0.50);
 
       box-shadow:
-        0 0 18px rgba(0,0,0,0.45),
-        0 0 18px rgba(255, 170, 210, 0.18);
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 16px rgba(255,255,255,0.10),
+        0 0 18px rgba(255, 170, 210, 0.10);
 
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(14px);
 
       animation: float 6s ease-in-out infinite;
     }
@@ -169,14 +182,17 @@
       100% { transform: translateY(0px); }
     }
 
-    /* PFP */
+    /* PROFILE */
+    .profile-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
     .pfp-wrap {
       position: relative;
       width: 95px;
       height: 95px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .pfp-wrap::after {
@@ -185,7 +201,6 @@
       inset: -7px;
       border-radius: 50%;
       border: 1px solid rgba(255, 170, 210, 0.55);
-      box-shadow: 0 0 14px rgba(255, 170, 210, 0.25);
       animation: ringSpin 10s linear infinite;
     }
 
@@ -201,23 +216,64 @@
       object-fit: cover;
     }
 
-    /* 🔷 VOLUME FRAME (separate bottom box) */
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .name {
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .cursor { animation: blink 1s infinite; }
+
+    @keyframes blink {
+      0%,100%{opacity:1;}
+      50%{opacity:0;}
+    }
+
+    .handle { color: rgba(255,255,255,0.75); }
+
+    /* LINKS */
+    .links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .roblox img,
+    .discord img {
+      width: 30px;
+      border-radius: 10px;
+      padding: 4px;
+      border: 1px solid rgba(255, 170, 210, 0.45);
+      transition: 0.2s;
+    }
+
+    .roblox img:hover,
+    .discord img:hover {
+      transform: scale(1.15);
+    }
+
+    /* VOLUME */
     .volume-wrap {
       display: flex;
       align-items: center;
       gap: 6px;
+      margin-top: 22px;
 
       padding: 6px 10px;
       border-radius: 14px;
-
-      background: rgba(0,0,0,0.15);
+      background: rgba(0,0,0,0.10);
       border: 1px solid rgba(255, 170, 210, 0.45);
+      backdrop-filter: blur(12px);
+    }
 
-      box-shadow:
-        0 0 10px rgba(0,0,0,0.4),
-        0 0 12px rgba(255, 170, 210, 0.12);
-
-      backdrop-filter: blur(10px);
+    .volume-wrap img {
+      width: 12px;
+      height: 12px;
+      filter: brightness(0) invert(1);
     }
 
     input[type="range"] {
@@ -236,22 +292,7 @@
       background: #ffd1e8;
     }
 
-    .hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .name {
-      font-size: 2rem;
-      font-weight: 900;
-    }
-
-    .cursor { animation: blink 1s infinite; }
-
-    @keyframes blink {
-      0%,100%{opacity:1;}
-      50%{opacity:0;}
-    }
+    .hidden { opacity: 0; pointer-events: none; }
   </style>
 </head>
 
@@ -268,78 +309,84 @@
 
 <audio id="rain" src="rain.mp3" loop></audio>
 
-<div id="content">
+<div class="frame">
+  <div id="content">
 
-  <!-- COUNTER FRAME -->
-  <div class="view-counter">
-    <img src="viewcounter.png">
-    <span>[DISABLED]</span>
+    <div class="view-counter">
+      <img src="viewcounter.png">
+      <span>[DISABLED]</span>
+    </div>
+
+    <div class="card">
+
+      <div class="profile-row">
+        <div class="pfp-wrap">
+          <img src="pfp.png" class="profile-pic">
+        </div>
+
+        <div class="info">
+          <div class="name" id="typedName"></div>
+          <div class="handle">.nighty_</div>
+        </div>
+      </div>
+
+      <div class="links">
+        <a href="https://www.roblox.com/users/348101/profile" target="_blank">
+          <img src="robloxbutton.png">
+        </a>
+
+        <a href="#"><img src="discordbutton.png"></a>
+      </div>
+
+    </div>
+
+    <div class="volume-wrap hidden" id="volume">
+      <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
+      <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="setVolume(this.value)">
+    </div>
+
   </div>
-
-  <!-- MAIN FRAME -->
-  <div class="card">
-
-    <div class="name">Angel</div>
-    <span class="cursor">|</span>
-
-  </div>
-
-  <!-- VOLUME FRAME -->
-  <div class="volume-wrap hidden" id="volume">
-    <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
-    <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="setVolume(this.value)">
-  </div>
-
 </div>
 
 <script>
 const rain = document.getElementById("rain");
 const volumeUI = document.getElementById("volume");
 
-function setVolume(v) {
-  rain.volume = v;
-}
+function setVolume(v){ rain.volume = v; }
 
-/* RAIN */
-function spawnRain(container) {
-  for (let i = 0; i < 25; i++) {
-    const drop = document.createElement("div");
-    drop.className = "drop";
-    drop.style.left = Math.random() * 100 + "px";
-    drop.style.animationDuration = (0.8 + Math.random() * 1.2) + "s";
-    container.appendChild(drop);
+function spawnRain(c){
+  for(let i=0;i<25;i++){
+    const d=document.createElement("div");
+    d.className="drop";
+    d.style.left=Math.random()*100+"px";
+    d.style.animationDuration=(0.8+Math.random()*1.2)+"s";
+    c.appendChild(d);
   }
 }
 
-spawnRain(document.getElementById("leftRain"));
-spawnRain(document.getElementById("rightRain"));
+spawnRain(leftRain);
+spawnRain(rightRain);
 
-/* TITLE */
-const titleText = "Nighty's Bio";
-let ti = 0;
-
-function animateTitle() {
-  if (ti <= titleText.length) {
-    document.title = titleText.substring(0, ti) + " |";
-    ti++;
-    setTimeout(animateTitle, 900);
-  }
-}
-
-function enterSite() {
+function enterSite(){
   document.querySelector(".intro").classList.add("fade-out");
   document.getElementById("content").classList.add("visible");
-
   volumeUI.classList.remove("hidden");
-
-  rain.volume = 0.05;
+  rain.volume=0.05;
   rain.play();
+  setTimeout(()=>document.querySelector(".intro").style.display="none",1200);
+  typeName();
+}
 
-  setTimeout(() => {
-    document.querySelector(".intro").style.display = "none";
-  }, 1200);
+/* typing */
+const text="Angel";
+let i=0;
 
-  animateTitle();
+function typeName(){
+  const el=document.getElementById("typedName");
+  if(i<text.length){
+    el.textContent+=text[i++];
+    setTimeout(typeName,900);
+  }
 }
 </script>
 

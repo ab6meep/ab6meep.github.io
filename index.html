@@ -18,7 +18,6 @@
       color: white;
     }
 
-    /* BACKGROUND */
     .bg {
       position: fixed;
       inset: 0;
@@ -35,30 +34,19 @@
       z-index: -3;
     }
 
-    /* FOG */
     .fog {
       position: fixed;
       inset: 0;
       z-index: -2;
       pointer-events: none;
-
       background:
         radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 40%),
         radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05), transparent 45%),
         radial-gradient(circle at 40% 80%, rgba(255,255,255,0.04), transparent 50%);
-
       filter: blur(40px);
       opacity: 0.9;
-      animation: fogDrift 20s ease-in-out infinite;
     }
 
-    @keyframes fogDrift {
-      0% { transform: translate(0px, 0px); }
-      50% { transform: translate(-40px, 20px); }
-      100% { transform: translate(0px, 0px); }
-    }
-
-    /* RAIN */
     .rain-side {
       position: fixed;
       top: 0;
@@ -77,7 +65,6 @@
       width: 2px;
       height: 14px;
       background: rgba(255,255,255,0.6);
-      opacity: 0.6;
       animation: fall linear infinite;
       border-radius: 999px;
     }
@@ -88,7 +75,6 @@
       100% { transform: translateY(110vh); opacity: 0; }
     }
 
-    /* INTRO */
     .intro {
       position: fixed;
       inset: 0;
@@ -105,13 +91,11 @@
 
     .intro.fade-out { opacity: 0; }
 
-    /* MAIN */
     #content {
       opacity: 0;
       filter: blur(12px);
       transform: translateY(10px);
       transition: 1.2s ease;
-
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -123,108 +107,16 @@
       transform: translateY(0);
     }
 
-    /* VIEW COUNTER (FIXED FRAME) */
-    .view-counter {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      margin-bottom: 18px;
-      padding: 6px 10px;
-      border-radius: 16px;
-
-      background: rgba(0,0,0,0.06);
-      border: 1px solid rgba(255, 170, 210, 0.35);
-
-      box-shadow: 0 0 10px rgba(255,255,255,0.05);
-
-      backdrop-filter: blur(12px);
-
-      color: rgba(255,255,255,0.75);
-      font-size: 0.85rem;
-    }
-
-    .view-counter img {
-      width: 16px;
-      height: 16px;
-    }
-
-    /* CARD (FIXED FRAME) */
     .card {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 22px;
-
       padding: 24px 36px;
       border-radius: 38px;
-
       background: rgba(0,0,0,0.08);
       border: 1px solid rgba(255, 170, 210, 0.40);
-
-      box-shadow: 0 0 12px rgba(255,255,255,0.06);
-
       backdrop-filter: blur(14px);
-
-      animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0px); }
-    }
-
-    /* PFP */
-    .pfp-wrap {
-      position: relative;
-      width: 95px;
-      height: 95px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .pfp-wrap::after {
-      content: "";
-      position: absolute;
-      inset: -7px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 170, 210, 0.55);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.18),
-        0 0 16px rgba(255, 170, 210, 0.20);
-      animation: ringSpin 10s linear infinite;
-    }
-
-    @keyframes ringSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .profile-pic {
-      width: 95px;
-      height: 95px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .profile-row {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .info {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .name-line {
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
 
     .name {
@@ -239,25 +131,32 @@
       50%{opacity:0;}
     }
 
-    .handle { color: rgba(255,255,255,0.75); }
-
-    /* VOLUME (FIXED FRAME) */
     .volume-wrap {
       display: flex;
       align-items: center;
       gap: 6px;
-
       margin-top: 22px;
-
       padding: 6px 10px;
       border-radius: 14px;
-
       background: rgba(0,0,0,0.06);
       border: 1px solid rgba(255, 170, 210, 0.35);
-
-      box-shadow: 0 0 10px rgba(255,255,255,0.05);
-
       backdrop-filter: blur(12px);
+    }
+
+    input[type="range"] {
+      width: 70px;
+      height: 2px;
+      appearance: none;
+      background: rgba(255, 170, 210, 0.4);
+      border-radius: 999px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffd1e8;
     }
 
     .hidden {
@@ -282,32 +181,30 @@
 
 <div id="content">
 
-  <div class="view-counter">
-    <img src="viewcounter.png">
-    <span>[DISABLED]</span>
-  </div>
-
   <div class="card">
 
-    <div class="profile-row">
-      <div class="pfp-wrap">
-        <img src="pfp.png" class="profile-pic">
-      </div>
+    <!-- 👤 YOUR NAME (UNCHANGED) -->
+    <div class="name">Angel</div>
 
-      <div class="info">
-        <div class="name-line">
-          <div id="typedName" class="name"></div>
-          <span class="cursor">|</span>
-        </div>
-        <div class="handle">.nighty_</div>
-      </div>
-    </div>
+    <span class="cursor">|</span>
 
   </div>
+
+  <!-- 🎛 VOLUME RESTORED -->
+  <div class="volume-wrap hidden" id="volume">
+    <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
+    <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="setVolume(this.value)">
+  </div>
+
 </div>
 
 <script>
 const rain = document.getElementById("rain");
+const volumeUI = document.getElementById("volume");
+
+function setVolume(v) {
+  rain.volume = v;
+}
 
 /* RAIN */
 function spawnRain(container) {
@@ -323,69 +220,23 @@ function spawnRain(container) {
 spawnRain(document.getElementById("leftRain"));
 spawnRain(document.getElementById("rightRain"));
 
-/* NAME */
-const nameText = "Nighty";
-let ni = 0;
-let forward = true;
-
-function animateName() {
-  const el = document.getElementById("typedName");
-
-  if (forward) {
-    ni++;
-    el.textContent = nameText.substring(0, ni);
-
-    if (ni === nameText.length) {
-      forward = false;
-      setTimeout(animateName, 1200);
-      return;
-    }
-  } else {
-    ni--;
-    el.textContent = nameText.substring(0, ni);
-
-    if (ni === 1) {
-      forward = true;
-      setTimeout(animateName, 900);
-      return;
-    }
-  }
-
-  setTimeout(animateName, 220);
-}
-
-/* TITLE */
+/* TITLE ANIMATION (ONLY THIS TEXT) */
 const titleText = "Nighty's Bio";
 let ti = 0;
-let tForward = true;
 
 function animateTitle() {
-  if (tForward) {
+  if (ti <= titleText.length) {
+    document.title = titleText.substring(0, ti) + " |";
     ti++;
-    document.title = titleText.substring(0, ti) + " |";
-
-    if (ti === titleText.length) {
-      tForward = false;
-      setTimeout(animateTitle, 1200);
-      return;
-    }
-  } else {
-    ti--;
-    document.title = titleText.substring(0, ti) + " |";
-
-    if (ti === 1) {
-      tForward = true;
-      setTimeout(animateTitle, 800);
-      return;
-    }
+    setTimeout(animateTitle, 900);
   }
-
-  setTimeout(animateTitle, 160);
 }
 
 function enterSite() {
   document.querySelector(".intro").classList.add("fade-out");
   document.getElementById("content").classList.add("visible");
+
+  volumeUI.classList.remove("hidden");
 
   rain.volume = 0.05;
   rain.play();
@@ -394,7 +245,6 @@ function enterSite() {
     document.querySelector(".intro").style.display = "none";
   }, 1200);
 
-  animateName();
   animateTitle();
 }
 </script>

@@ -145,6 +145,11 @@
       border: 1px solid rgba(255, 170, 210, 0.50);
       backdrop-filter: blur(14px);
       animation: float 6s ease-in-out infinite;
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.15),
+        0 0 16px rgba(255,255,255,0.08),
+        0 0 18px rgba(255, 170, 210, 0.12);
     }
 
     @keyframes float {
@@ -159,9 +164,36 @@
       gap: 22px;
     }
 
+    /* ✅ PINK GLOW RING RESTORED */
     .pfp-wrap {
+      position: relative;
       width: 95px;
       height: 95px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pfp-wrap::after {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: 50%;
+
+      border: 1px solid rgba(255, 170, 210, 0.55);
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 14px rgba(255,255,255,0.10),
+        0 0 18px rgba(255, 170, 210, 0.25),
+        0 0 28px rgba(255, 120, 180, 0.15);
+
+      animation: ringSpin 10s linear infinite;
+    }
+
+    @keyframes ringSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .profile-pic {
@@ -207,10 +239,8 @@
       transform: scale(1.15);
     }
 
-    /* DISCORD FIXED */
     .discord {
       position: relative;
-      display: inline-block;
     }
 
     .discord::after {
@@ -313,7 +343,6 @@
         </a>
       </div>
 
-      <!-- NOT CLICKABLE ANYMORE -->
       <div class="discord">
         <img src="assets/discordbutton.png">
       </div>

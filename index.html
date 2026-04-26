@@ -35,7 +35,7 @@
       z-index: -2;
     }
 
-    /* 🌫 FOG */
+    /* FOG */
     .fog {
       position: fixed;
       inset: 0;
@@ -98,7 +98,7 @@
       transform: translateY(0);
     }
 
-    /* 🔊 VOLUME */
+    /* VOLUME */
     .volume-wrap {
       position: fixed;
       top: 10px;
@@ -110,10 +110,11 @@
       gap: 6px;
 
       padding: 4px 8px;
-      border-radius: 9px;
+      border-radius: 10px;
 
       background: rgba(0,0,0,0.25);
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255, 170, 210, 0.45);
+
       backdrop-filter: blur(6px);
 
       z-index: 80;
@@ -131,7 +132,7 @@
       height: 2px;
 
       appearance: none;
-      background: rgba(255,255,255,0.25);
+      background: rgba(255, 170, 210, 0.4);
       border-radius: 999px;
       outline: none;
       cursor: pointer;
@@ -142,18 +143,18 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: white;
+      background: #ffd1e8;
     }
 
     input[type="range"]::-moz-range-thumb {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: white;
+      background: #ffd1e8;
       border: none;
     }
 
-    /* CARD (now more circular/soft) */
+    /* CARD (more circular + unified pink outline) */
     .card {
       display: flex;
       flex-direction: column;
@@ -161,10 +162,11 @@
       gap: 22px;
 
       padding: 24px 36px;
-      border-radius: 26px; /* 🔥 more circular feel */
+      border-radius: 34px;
 
       background: rgba(0,0,0,0.28);
-      border: 1px solid rgba(255,255,255,0.15);
+
+      border: 1px solid rgba(255, 170, 210, 0.45);
 
       backdrop-filter: blur(6px);
 
@@ -177,7 +179,7 @@
       100% { transform: translateY(0px); }
     }
 
-    /* 🧿 PFP WRAPPER + PINK RING */
+    /* PFP WRAPPER + PINK RING */
     .pfp-wrap {
       position: relative;
       width: 95px;
@@ -193,11 +195,12 @@
       inset: -6px;
       border-radius: 50%;
 
-      border: 1px solid rgba(255, 110, 200, 0.65);
+      border: 1px solid rgba(255, 170, 210, 0.55);
+
       box-shadow:
-        0 0 12px rgba(255, 80, 180, 0.35),
-        0 0 25px rgba(255, 90, 190, 0.22),
-        inset 0 0 10px rgba(255, 120, 210, 0.15);
+        0 0 10px rgba(255, 170, 210, 0.25),
+        0 0 22px rgba(255, 170, 210, 0.18),
+        inset 0 0 10px rgba(255, 170, 210, 0.12);
 
       animation: ringSpin 10s linear infinite;
     }
@@ -216,17 +219,17 @@
       animation: glowPulse 4s ease-in-out infinite;
     }
 
-    /* 💗 PINK GLOW */
+    /* softer pink glow */
     @keyframes glowPulse {
       0%, 100% {
         box-shadow:
-          0 0 18px rgba(255, 90, 170, 0.35),
-          0 0 35px rgba(255, 80, 180, 0.25);
+          0 0 16px rgba(255, 170, 210, 0.25),
+          0 0 30px rgba(255, 170, 210, 0.18);
       }
       50% {
         box-shadow:
-          0 0 30px rgba(255, 120, 200, 0.5),
-          0 0 60px rgba(255, 90, 190, 0.35);
+          0 0 26px rgba(255, 170, 210, 0.35),
+          0 0 55px rgba(255, 170, 210, 0.22);
       }
     }
 
@@ -274,8 +277,8 @@
     .roblox img,
     .discord img {
       width: 30px;
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 7px;
+      border: 1px solid rgba(255, 170, 210, 0.45);
+      border-radius: 10px;
       padding: 4px;
       transition: 0.2s;
     }
@@ -315,7 +318,7 @@
       opacity: 1;
     }
 
-    /* VIEW COUNTER */
+    /* VIEW COUNTER (same pink outline) */
     .view-counter {
       display: flex;
       align-items: center;
@@ -326,7 +329,7 @@
       border-radius: 12px;
 
       background: rgba(0,0,0,0.25);
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255, 170, 210, 0.45);
 
       color: rgba(255,255,255,0.75);
       font-size: 0.85rem;
@@ -355,10 +358,9 @@
 
 <audio id="rain" src="rain.mp3" loop></audio>
 
-<!-- 🔊 VOLUME -->
 <div class="volume-wrap hidden" id="volume">
   <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
-  <input type="range" min="0" max="1" step="0.01" value="0.02" oninput="setVolume(this.value)">
+  <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="setVolume(this.value)">
 </div>
 
 <div id="content">
@@ -420,7 +422,7 @@ function enterSite() {
 
   volumeUI.classList.remove("hidden");
 
-  rain.volume = 0.02;
+  rain.volume = 0.05; // 🔊 slightly louder than before
   rain.play();
 
   setTimeout(() => {

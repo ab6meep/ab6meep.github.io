@@ -153,17 +153,17 @@
       border: none;
     }
 
-    /* CARD */
+    /* CARD (now more circular/soft) */
     .card {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 22px;
 
-      padding: 22px 34px;
-      border-radius: 12px;
+      padding: 24px 36px;
+      border-radius: 26px; /* 🔥 more circular feel */
 
-      background: rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.28);
       border: 1px solid rgba(255,255,255,0.15);
 
       backdrop-filter: blur(6px);
@@ -177,7 +177,7 @@
       100% { transform: translateY(0px); }
     }
 
-    /* 🧿 PFP WRAPPER + RING */
+    /* 🧿 PFP WRAPPER + PINK RING */
     .pfp-wrap {
       position: relative;
       width: 95px;
@@ -193,10 +193,11 @@
       inset: -6px;
       border-radius: 50%;
 
-      border: 1px solid rgba(255,255,255,0.35);
+      border: 1px solid rgba(255, 110, 200, 0.65);
       box-shadow:
-        0 0 10px rgba(255,255,255,0.15),
-        inset 0 0 10px rgba(255,255,255,0.08);
+        0 0 12px rgba(255, 80, 180, 0.35),
+        0 0 25px rgba(255, 90, 190, 0.22),
+        inset 0 0 10px rgba(255, 120, 210, 0.15);
 
       animation: ringSpin 10s linear infinite;
     }
@@ -211,12 +212,22 @@
       height: 95px;
       border-radius: 50%;
       object-fit: cover;
+
       animation: glowPulse 4s ease-in-out infinite;
     }
 
+    /* 💗 PINK GLOW */
     @keyframes glowPulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.5); }
-      50% { box-shadow: 0 0 40px rgba(255,255,255,0.8); }
+      0%, 100% {
+        box-shadow:
+          0 0 18px rgba(255, 90, 170, 0.35),
+          0 0 35px rgba(255, 80, 180, 0.25);
+      }
+      50% {
+        box-shadow:
+          0 0 30px rgba(255, 120, 200, 0.5),
+          0 0 60px rgba(255, 90, 190, 0.35);
+      }
     }
 
     .profile-row {
@@ -347,7 +358,7 @@
 <!-- 🔊 VOLUME -->
 <div class="volume-wrap hidden" id="volume">
   <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
-  <input type="range" min="0" max="1" step="0.01" value="0.2" oninput="setVolume(this.value)">
+  <input type="range" min="0" max="1" step="0.01" value="0.02" oninput="setVolume(this.value)">
 </div>
 
 <div id="content">
@@ -409,7 +420,7 @@ function enterSite() {
 
   volumeUI.classList.remove("hidden");
 
-  rain.volume = 0.2;
+  rain.volume = 0.02;
   rain.play();
 
   setTimeout(() => {

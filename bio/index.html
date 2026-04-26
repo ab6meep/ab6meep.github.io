@@ -486,8 +486,6 @@ function animateName() {
 }
 
 function animateTitle() {
-  const el = document.title;
-
   if (tForward) {
     ti++;
     document.title = titleText.substring(0, ti);
@@ -499,9 +497,11 @@ function animateTitle() {
     }
   } else {
     ti--;
+
+    // stop at "N" instead of going fully empty
     document.title = titleText.substring(0, ti);
 
-    if (ti === 0) {
+    if (ti === 1) {
       tForward = true;
       setTimeout(animateTitle, 900);
       return;

@@ -25,21 +25,21 @@
       background: url("background1.gif") center/cover no-repeat;
       filter: blur(6px) brightness(0.55);
       transform: scale(1.05);
-      z-index: -3;
+      z-index: -4;
     }
 
     .overlay {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.82);
-      z-index: -2;
+      z-index: -3;
     }
 
     /* FOG */
     .fog {
       position: fixed;
       inset: 0;
-      z-index: -1;
+      z-index: -2;
       pointer-events: none;
 
       background:
@@ -56,6 +56,42 @@
       0% { transform: translate(0px, 0px); }
       50% { transform: translate(-40px, 20px); }
       100% { transform: translate(0px, 0px); }
+    }
+
+    /* 🌧 LEFT + RIGHT PARTICLES */
+    .rain-side {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .left { left: 0; }
+    .right { right: 0; }
+
+    .drop {
+      position: absolute;
+      width: 2px;
+      height: 14px;
+      background: rgba(255,255,255,0.6);
+      opacity: 0.6;
+      animation: fall linear infinite;
+      border-radius: 999px;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      10% { opacity: 0.7; }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
     }
 
     /* INTRO */
@@ -97,28 +133,20 @@
       transform: translateY(0);
     }
 
-    /* =========================
-       🔳 DOUBLE OUTLINE SYSTEM
-       ========================= */
-
-    /* VIEW COUNTER */
+    /* VIEW COUNTER (slightly UP) */
     .view-counter {
       display: flex;
       align-items: center;
       gap: 8px;
 
-      margin-bottom: 12px;
+      margin-bottom: 18px; /* was 12 → moved UP visually */
 
       padding: 6px 10px;
       border-radius: 16px;
 
-      /* ultra transparent */
       background: rgba(0,0,0,0.10);
-
-      /* pink inner border */
       border: 1px solid rgba(255, 170, 210, 0.45);
 
-      /* white outer ring */
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
         0 0 14px rgba(255,255,255,0.08);
@@ -134,7 +162,7 @@
       height: 16px;
     }
 
-    /* CARD (PROFILE FRAME) */
+    /* CARD */
     .card {
       display: flex;
       flex-direction: column;
@@ -144,17 +172,13 @@
       padding: 24px 36px;
       border-radius: 38px;
 
-      /* almost invisible inside */
       background: rgba(0,0,0,0.12);
 
-      /* pink inner outline */
       border: 1px solid rgba(255, 170, 210, 0.50);
 
-      /* white outer ring + glow separation */
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
         0 0 16px rgba(255,255,255,0.10),
-
         0 0 18px rgba(255, 170, 210, 0.10);
 
       backdrop-filter: blur(14px);
@@ -168,7 +192,7 @@
       100% { transform: translateY(0px); }
     }
 
-    /* PFP + PINK RING */
+    /* PFP */
     .pfp-wrap {
       position: relative;
       width: 95px;
@@ -189,7 +213,6 @@
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
         0 0 14px rgba(255,255,255,0.10),
-
         0 0 16px rgba(255, 170, 210, 0.20);
 
       animation: ringSpin 10s linear infinite;
@@ -205,19 +228,6 @@
       height: 95px;
       border-radius: 50%;
       object-fit: cover;
-
-      animation: glowPulse 4s ease-in-out infinite;
-    }
-
-    @keyframes glowPulse {
-      0%, 100% {
-        box-shadow:
-          0 0 14px rgba(255, 170, 210, 0.20);
-      }
-      50% {
-        box-shadow:
-          0 0 24px rgba(255, 170, 210, 0.30);
-      }
     }
 
     .profile-row {
@@ -281,10 +291,7 @@
       transform: scale(1.15);
     }
 
-    .discord {
-      position: relative;
-      z-index: 9999;
-    }
+    .discord { position: relative; z-index: 9999; }
 
     .discord::after {
       content: "discord .nighty_";
@@ -300,20 +307,19 @@
 
       opacity: 0;
       transition: 0.2s;
-      pointer-events: none;
     }
 
     .discord:hover::after {
       opacity: 1;
     }
 
-    /* VOLUME */
+    /* VOLUME (slightly LOWER) */
     .volume-wrap {
       display: flex;
       align-items: center;
       gap: 6px;
 
-      margin-top: 14px;
+      margin-top: 22px; /* was 14 → moved DOWN */
 
       padding: 6px 10px;
       border-radius: 14px;
@@ -342,7 +348,6 @@
       appearance: none;
       background: rgba(255, 170, 210, 0.4);
       border-radius: 999px;
-      outline: none;
     }
 
     input[type="range"]::-webkit-slider-thumb {
@@ -365,6 +370,10 @@
 <div class="bg"></div>
 <div class="overlay"></div>
 <div class="fog"></div>
+
+<!-- 🌧 SIDE RAIN -->
+<div class="rain-side left" id="leftRain"></div>
+<div class="rain-side right" id="rightRain"></div>
 
 <div class="intro" onclick="enterSite()">click to enter &lt;3</div>
 
@@ -405,9 +414,7 @@
       </div>
 
       <div class="discord">
-        <a href="#">
-          <img src="discordbutton.png">
-        </a>
+        <a href="#"><img src="discordbutton.png"></a>
       </div>
     </div>
 
@@ -427,6 +434,22 @@ const volumeUI = document.getElementById("volume");
 function setVolume(v) {
   rain.volume = v;
 }
+
+function spawnRain(container) {
+  for (let i = 0; i < 25; i++) {
+    const drop = document.createElement("div");
+    drop.className = "drop";
+
+    drop.style.left = Math.random() * 100 + "px";
+    drop.style.animationDuration = (0.8 + Math.random() * 1.2) + "s";
+    drop.style.opacity = Math.random() * 0.6;
+
+    container.appendChild(drop);
+  }
+}
+
+spawnRain(document.getElementById("leftRain"));
+spawnRain(document.getElementById("rightRain"));
 
 function enterSite() {
   document.querySelector(".intro").classList.add("fade-out");

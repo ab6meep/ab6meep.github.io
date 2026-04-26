@@ -83,7 +83,7 @@
       margin-right: auto;
     }
 
-    /* NAME + GLOW */
+    /* NAME + BADGE */
     .name-row {
       display: flex;
       align-items: center;
@@ -97,18 +97,16 @@
       font-weight: 900;
       letter-spacing: 1px;
       color: white;
-
       text-shadow:
         0 0 6px rgba(255,255,255,0.35),
         0 0 12px rgba(255,255,255,0.25),
         0 0 24px rgba(255,255,255,0.15);
     }
 
-    /* BADGE */
+    /* BADGE GIF */
     .badge img {
       width: 26px;
-      image-rendering: auto;
-      filter: drop-shadow(0 0 4px rgba(255,255,255,0.25));
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.25));
     }
 
     /* ROBLOX BUTTON */
@@ -160,7 +158,7 @@
     <div class="name-row">
       <div class="name">Angel</div>
       <div class="badge">
-        <img src="badge1.png">
+        <img src="badge1.gif">
       </div>
     </div>
 
@@ -185,11 +183,9 @@
       intro.classList.add("fade-out");
       content.classList.add("visible");
 
-      // start rain (quiet)
       rain.volume = 0.2;
       rain.play();
 
-      // show audio button
       btn.style.display = "block";
 
       setTimeout(() => {

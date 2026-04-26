@@ -117,6 +117,26 @@
       transform: translateY(0);
     }
 
+    /* VIEW COUNTER (RESTORED) */
+    .view-counter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 6px 10px;
+      border-radius: 16px;
+      background: rgba(0,0,0,0.10);
+      border: 1px solid rgba(255, 170, 210, 0.45);
+      backdrop-filter: blur(12px);
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .view-counter img {
+      width: 16px;
+      height: 16px;
+    }
+
     .card {
       display: flex;
       flex-direction: column;
@@ -185,6 +205,7 @@
       transform: scale(1.12);
     }
 
+    /* VOLUME (RESTORED) */
     .volume-wrap {
       display: flex;
       align-items: center;
@@ -218,6 +239,12 @@
 
 <div id="content">
 
+  <!-- VIEW COUNTER BACK -->
+  <div class="view-counter">
+    <img src="assets/viewcounter.png">
+    <span>[DISABLED]</span>
+  </div>
+
   <div class="card">
 
     <div class="pfp-wrap">
@@ -237,6 +264,13 @@
       <a href="#"><img src="assets/discordbutton.png"></a>
     </div>
 
+  </div>
+
+  <!-- VOLUME SLIDER BACK -->
+  <div class="volume-wrap">
+    <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
+    <input type="range" min="0" max="1" step="0.01" value="0.05"
+      oninput="document.getElementById('rain').volume = this.value">
   </div>
 
 </div>

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title id="title">n</title>
+  <title>@</title>
 
   <link rel="icon" href="icon.png" type="image/png">
 
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@900&display=swap" rel="stylesheet">
+  <!-- FIXED FONT (not bold anymore) -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -48,6 +49,7 @@
       z-index: 10;
       cursor: pointer;
       font-size: 2rem;
+      font-weight: 400; /* NOT BOLD */
       text-shadow: 0 0 10px white;
       transition: opacity 1.2s ease;
     }
@@ -74,22 +76,34 @@
       transform: translateY(0);
     }
 
-    /* MAIN ROW (GUNS.LOL STYLE) */
+    /* PROFILE ROW */
     .profile-row {
       display: flex;
       align-items: center;
       gap: 16px;
     }
 
+    /* STRONGER WHITE GLOW */
     .profile-pic {
       width: 95px;
       height: 95px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 0 18px rgba(255,255,255,0.25);
+      box-shadow:
+        0 0 12px rgba(255,255,255,0.6),
+        0 0 25px rgba(255,255,255,0.45),
+        0 0 45px rgba(255,255,255,0.25);
+      transition: 0.3s ease;
     }
 
-    /* NAME + BADGE + TEXT STACK */
+    .profile-pic:hover {
+      box-shadow:
+        0 0 18px rgba(255,255,255,0.9),
+        0 0 35px rgba(255,255,255,0.7),
+        0 0 60px rgba(255,255,255,0.4);
+    }
+
+    /* INFO */
     .info {
       display: flex;
       flex-direction: column;
@@ -105,7 +119,6 @@
     .name {
       font-size: 2rem;
       font-weight: 900;
-      color: white;
       text-shadow:
         0 0 6px rgba(255,255,255,0.35),
         0 0 12px rgba(255,255,255,0.25);
@@ -116,14 +129,12 @@
       filter: drop-shadow(0 0 5px rgba(255,255,255,0.25));
     }
 
-    /* HANDLE / TEXT */
     .handle {
       font-size: 1rem;
       color: rgba(255,255,255,0.75);
       letter-spacing: 0.3px;
     }
 
-    /* ROBLOX BUTTON */
     .roblox img {
       width: 38px;
       filter: drop-shadow(0 0 6px white);
@@ -134,7 +145,6 @@
       transform: scale(1.15);
     }
 
-    /* AUDIO BUTTON */
     .audio-btn {
       position: fixed;
       top: 20px;
@@ -148,23 +158,18 @@
       border-radius: 10px;
       display: none;
     }
-
   </style>
 </head>
 
 <body>
 
-  <!-- BACKGROUND -->
   <div class="bg"></div>
   <div class="overlay"></div>
 
-  <!-- INTRO -->
-  <div class="intro" onclick="enterSite()">click to enter <3</div>
+  <div class="intro" onclick="enterSite()">click to enter &lt;3</div>
 
-  <!-- AUDIO -->
   <audio id="rain" src="rain.mp3" loop></audio>
 
-  <!-- CONTENT -->
   <div id="content">
 
     <div class="profile-row">
@@ -194,7 +199,6 @@
 
   </div>
 
-  <!-- AUDIO -->
   <button class="audio-btn" onclick="toggleAudio()">mute</button>
 
   <script>
@@ -230,9 +234,9 @@
       }
     }
 
-    /* TITLE TYPE + REVERSE */
-    const text = "nighty.wtf";
-    let i = 0;
+    /* FIXED TITLE ANIMATION */
+    const text = "@Nighty.wtf";
+    let i = 1;
     let forward = true;
 
     function animateTitle() {
@@ -242,19 +246,21 @@
 
         if (i === text.length) {
           forward = false;
-          setTimeout(animateTitle, 1000);
+          setTimeout(animateTitle, 800);
           return;
         }
       } else {
         i--;
         document.title = text.substring(0, i);
 
-        if (i === 0) {
+        if (i === 1) {
           forward = true;
+          setTimeout(animateTitle, 800);
+          return;
         }
       }
 
-      setTimeout(animateTitle, 1000);
+      setTimeout(animateTitle, 120);
     }
 
     animateTitle();

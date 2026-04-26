@@ -3,7 +3,7 @@
 <head>
   <title>@</title>
 
-  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="icon" href="assets/icon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap" rel="stylesheet">
 
   <style>
@@ -22,7 +22,7 @@
     .bg {
       position: fixed;
       inset: 0;
-      background: url("background1.gif") center/cover no-repeat;
+      background: url("assets/background1.gif") center/cover no-repeat;
       filter: blur(6px) brightness(0.55);
       transform: scale(1.05);
       z-index: -4;
@@ -139,7 +139,7 @@
       align-items: center;
       gap: 8px;
 
-      margin-bottom: 18px; /* was 12 → moved UP visually */
+      margin-bottom: 18px;
 
       padding: 6px 10px;
       border-radius: 16px;
@@ -319,7 +319,7 @@
       align-items: center;
       gap: 6px;
 
-      margin-top: 22px; /* was 14 → moved DOWN */
+      margin-top: 22px;
 
       padding: 6px 10px;
       border-radius: 14px;
@@ -371,18 +371,17 @@
 <div class="overlay"></div>
 <div class="fog"></div>
 
-<!-- 🌧 SIDE RAIN -->
 <div class="rain-side left" id="leftRain"></div>
 <div class="rain-side right" id="rightRain"></div>
 
 <div class="intro" onclick="enterSite()">click to enter &lt;3</div>
 
-<audio id="rain" src="rain.mp3" loop></audio>
+<audio id="rain" src="sounds/rain.mp3" loop></audio>
 
 <div id="content">
 
   <div class="view-counter">
-    <img src="viewcounter.png">
+    <img src="assets/viewcounter.png">
     <span>[DISABLED]</span>
   </div>
 
@@ -390,7 +389,7 @@
 
     <div class="profile-row">
       <div class="pfp-wrap">
-        <img src="pfp.png" class="profile-pic">
+        <img src="assets/pfp.png" class="profile-pic">
       </div>
 
       <div class="info">
@@ -398,7 +397,7 @@
           <div id="typedName" class="name"></div>
           <span class="cursor">|</span>
           <div class="badge">
-            <img src="badge1.gif">
+            <img src="assets/badge1.gif">
           </div>
         </div>
 
@@ -409,12 +408,12 @@
     <div class="links">
       <div class="roblox">
         <a href="https://www.roblox.com/users/348101/profile" target="_blank">
-          <img src="robloxbutton.png">
+          <img src="assets/robloxbutton.png">
         </a>
       </div>
 
       <div class="discord">
-        <a href="#"><img src="discordbutton.png"></a>
+        <a href="#"><img src="assets/discordbutton.png"></a>
       </div>
     </div>
 

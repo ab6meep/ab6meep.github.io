@@ -18,6 +18,7 @@
       color: white;
     }
 
+    /* BACKGROUND */
     .bg {
       position: fixed;
       inset: 0;
@@ -45,8 +46,16 @@
         radial-gradient(circle at 40% 80%, rgba(255,255,255,0.04), transparent 50%);
       filter: blur(40px);
       opacity: 0.9;
+      animation: fogDrift 20s ease-in-out infinite;
     }
 
+    @keyframes fogDrift {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-40px, 20px); }
+      100% { transform: translate(0px, 0px); }
+    }
+
+    /* RAIN */
     .rain-side {
       position: fixed;
       top: 0;
@@ -75,6 +84,7 @@
       100% { transform: translateY(110vh); opacity: 0; }
     }
 
+    /* INTRO */
     .intro {
       position: fixed;
       inset: 0;
@@ -91,6 +101,7 @@
 
     .intro.fade-out { opacity: 0; }
 
+    /* MAIN */
     #content {
       opacity: 0;
       filter: blur(12px);
@@ -107,18 +118,58 @@
       transform: translateY(0);
     }
 
+    /* VIEW COUNTER (FIXED FRAME) */
+    .view-counter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      margin-bottom: 18px;
+      padding: 6px 10px;
+      border-radius: 16px;
+
+      background: rgba(0,0,0,0.08);
+      border: 1px solid rgba(255, 170, 210, 0.35);
+
+      box-shadow:
+        0 0 8px rgba(0,0,0,0.25),
+        inset 0 0 8px rgba(255,255,255,0.04);
+
+      backdrop-filter: blur(12px);
+
+      color: rgba(255,255,255,0.75);
+      font-size: 0.85rem;
+    }
+
+    /* CARD (FIXED FRAME) */
     .card {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 22px;
+
       padding: 24px 36px;
       border-radius: 38px;
-      background: rgba(0,0,0,0.08);
-      border: 1px solid rgba(255, 170, 210, 0.40);
+
+      background: rgba(0,0,0,0.07);
+      border: 1px solid rgba(255, 170, 210, 0.38);
+
+      box-shadow:
+        0 0 12px rgba(0,0,0,0.25),
+        inset 0 0 10px rgba(255,255,255,0.04);
+
       backdrop-filter: blur(14px);
+
+      animation: float 6s ease-in-out infinite;
     }
 
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* NAME */
     .name {
       font-size: 2rem;
       font-weight: 900;
@@ -131,15 +182,23 @@
       50%{opacity:0;}
     }
 
+    /* VOLUME (FIXED FRAME) */
     .volume-wrap {
       display: flex;
       align-items: center;
       gap: 6px;
+
       margin-top: 22px;
       padding: 6px 10px;
       border-radius: 14px;
-      background: rgba(0,0,0,0.06);
+
+      background: rgba(0,0,0,0.08);
       border: 1px solid rgba(255, 170, 210, 0.35);
+
+      box-shadow:
+        0 0 8px rgba(0,0,0,0.25),
+        inset 0 0 8px rgba(255,255,255,0.04);
+
       backdrop-filter: blur(12px);
     }
 
@@ -181,16 +240,18 @@
 
 <div id="content">
 
+  <div class="view-counter">
+    <img src="viewcounter.png">
+    <span>[DISABLED]</span>
+  </div>
+
   <div class="card">
 
-    <!-- 👤 YOUR NAME (UNCHANGED) -->
     <div class="name">Angel</div>
-
     <span class="cursor">|</span>
 
   </div>
 
-  <!-- 🎛 VOLUME RESTORED -->
   <div class="volume-wrap hidden" id="volume">
     <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
     <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="setVolume(this.value)">
@@ -220,7 +281,7 @@ function spawnRain(container) {
 spawnRain(document.getElementById("leftRain"));
 spawnRain(document.getElementById("rightRain"));
 
-/* TITLE ANIMATION (ONLY THIS TEXT) */
+/* TITLE ANIMATION */
 const titleText = "Nighty's Bio";
 let ti = 0;
 

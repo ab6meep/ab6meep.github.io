@@ -18,7 +18,6 @@
       color: white;
     }
 
-    /* BACKGROUND */
     .bg {
       position: fixed;
       inset: 0;
@@ -35,7 +34,7 @@
       z-index: -2;
     }
 
-    /* 🌫 FOG LAYER */
+    /* 🌫 FOG */
     .fog {
       position: fixed;
       inset: 0;
@@ -51,17 +50,6 @@
       0% { transform: translateX(0); }
       50% { transform: translateX(-80px); }
       100% { transform: translateX(0); }
-    }
-
-    /* 🌾 GRAIN OVERLAY */
-    .grain {
-      position: fixed;
-      inset: 0;
-      background: url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
-      opacity: 0.06;
-      z-index: 5;
-      pointer-events: none;
-      mix-blend-mode: overlay;
     }
 
     /* CLICK SCREEN */
@@ -85,7 +73,7 @@
 
     .intro.fade-out { opacity: 0; }
 
-    /* MAIN WRAPPER */
+    /* MAIN WRAP */
     #content {
       opacity: 0;
       filter: blur(12px);
@@ -103,20 +91,35 @@
       transform: translateY(0);
     }
 
-    /* 🔊 VOLUME WHEEL */
+    /* 🔊 TOP VOLUME BAR */
     .volume-wrap {
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
+      position: fixed;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
 
-      color: rgba(255,255,255,0.7);
-      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 6px 10px;
+      border-radius: 10px;
+
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+
+      z-index: 60;
+    }
+
+    .volume-wrap img {
+      width: 16px;
+      height: 16px;
+      opacity: 0.85;
     }
 
     input[type="range"] {
-      width: 120px;
+      width: 80px;
       accent-color: white;
       cursor: pointer;
     }
@@ -161,12 +164,8 @@
     }
 
     @keyframes glowPulse {
-      0%, 100% {
-        box-shadow: 0 0 20px rgba(255,255,255,0.5);
-      }
-      50% {
-        box-shadow: 0 0 40px rgba(255,255,255,0.8);
-      }
+      0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.5); }
+      50% { box-shadow: 0 0 40px rgba(255,255,255,0.8); }
     }
 
     .info {
@@ -269,6 +268,7 @@
 
     .view-counter img {
       width: 16px;
+      height: 16px;
     }
   </style>
 </head>
@@ -278,18 +278,18 @@
 <div class="bg"></div>
 <div class="overlay"></div>
 <div class="fog"></div>
-<div class="grain"></div>
 
 <div class="intro" onclick="enterSite()">click to enter &lt;3</div>
 
 <audio id="rain" src="rain.mp3" loop></audio>
 
-<div id="content">
+<!-- 🔊 TOP VOLUME CONTROL -->
+<div class="volume-wrap">
+  <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png">
+  <input type="range" min="0" max="1" step="0.01" value="0.2" oninput="setVolume(this.value)">
+</div>
 
-  <!-- 🔊 VOLUME CONTROL -->
-  <div class="volume-wrap">
-    <input type="range" min="0" max="1" step="0.01" value="0.2" oninput="setVolume(this.value)">
-  </div>
+<div id="content">
 
   <div class="card">
 
@@ -340,17 +340,14 @@ function setVolume(v) {
 }
 
 function enterSite() {
-  const intro = document.querySelector(".intro");
-  const content = document.getElementById("content");
-
-  intro.classList.add("fade-out");
-  content.classList.add("visible");
+  document.querySelector(".intro").classList.add("fade-out");
+  document.getElementById("content").classList.add("visible");
 
   rain.volume = 0.2;
   rain.play();
 
   setTimeout(() => {
-    intro.style.display = "none";
+    document.querySelector(".intro").style.display = "none";
   }, 1200);
 
   animateName();

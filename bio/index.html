@@ -3,7 +3,7 @@
 <head>
   <title></title>
 
-  <link rel="icon" href="assets/icon.png" type="image/png">
+  <link rel="icon" href="icon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap" rel="stylesheet">
 
   <style>
@@ -21,7 +21,7 @@
     .bg {
       position: fixed;
       inset: 0;
-      background: url("assets/background1.gif") center/cover no-repeat;
+      background: url("background1.gif") center/cover no-repeat;
       filter: blur(6px) brightness(0.55);
       transform: scale(1.05);
       z-index: -4;
@@ -126,15 +126,15 @@
       border-radius: 16px;
       background: rgba(0,0,0,0.10);
       border: 1px solid rgba(255, 170, 210, 0.45);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.18),
-        0 0 14px rgba(255,255,255,0.08);
       backdrop-filter: blur(12px);
       color: rgba(255,255,255,0.75);
       font-size: 0.85rem;
     }
 
-    .view-counter img { width: 16px; height: 16px; }
+    .view-counter img {
+      width: 16px;
+      height: 16px;
+    }
 
     .card {
       display: flex;
@@ -145,10 +145,6 @@
       border-radius: 38px;
       background: rgba(0,0,0,0.12);
       border: 1px solid rgba(255, 170, 210, 0.50);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.18),
-        0 0 16px rgba(255,255,255,0.10),
-        0 0 18px rgba(255, 170, 210, 0.10);
       backdrop-filter: blur(14px);
       animation: float 6s ease-in-out infinite;
     }
@@ -168,24 +164,6 @@
       justify-content: center;
     }
 
-    .pfp-wrap::after {
-      content: "";
-      position: absolute;
-      inset: -7px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 170, 210, 0.55);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.18),
-        0 0 14px rgba(255,255,255,0.10),
-        0 0 16px rgba(255, 170, 210, 0.20);
-      animation: ringSpin 10s linear infinite;
-    }
-
-    @keyframes ringSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
     .profile-pic {
       width: 95px;
       height: 95px;
@@ -199,16 +177,10 @@
       gap: 22px;
     }
 
-    .info {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
     .name-line {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
     }
 
     .name {
@@ -216,7 +188,9 @@
       font-weight: 900;
     }
 
-    .cursor { animation: blink 1s infinite; }
+    .cursor {
+      animation: blink 1s infinite;
+    }
 
     @keyframes blink {
       0%,100%{opacity:1;}
@@ -237,42 +211,12 @@
       border-radius: 10px;
       padding: 4px;
       border: 1px solid rgba(255, 170, 210, 0.45);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.18),
-        0 0 10px rgba(255,255,255,0.08);
       transition: 0.2s;
     }
 
     .roblox img:hover,
     .discord img:hover {
       transform: scale(1.15);
-    }
-
-    .discord {
-      position: relative;
-      z-index: 9999;
-    }
-
-    .discord a {
-      pointer-events: none; /* disables click */
-    }
-
-    .discord::after {
-      content: "discord .nighty_";
-      position: absolute;
-      bottom: -28px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.7rem;
-      background: rgba(0,0,0,0.45);
-      padding: 3px 7px;
-      border-radius: 6px;
-      opacity: 0;
-      transition: 0.2s;
-    }
-
-    .discord:hover::after {
-      opacity: 1;
     }
 
     .volume-wrap {
@@ -284,10 +228,29 @@
       border-radius: 14px;
       background: rgba(0,0,0,0.10);
       border: 1px solid rgba(255, 170, 210, 0.45);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.18),
-        0 0 12px rgba(255,255,255,0.08);
       backdrop-filter: blur(12px);
+    }
+
+    .volume-wrap img {
+      width: 12px;
+      height: 12px;
+      filter: brightness(0) invert(1);
+    }
+
+    input[type="range"] {
+      width: 70px;
+      height: 2px;
+      appearance: none;
+      background: rgba(255, 170, 210, 0.4);
+      border-radius: 999px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffd1e8;
     }
 
     .hidden {
@@ -308,12 +271,12 @@
 
 <div class="intro" onclick="enterSite()">click to enter &lt;3</div>
 
-<audio id="rain" src="sounds/rain.mp3" loop></audio>
+<audio id="rain" src="rain.mp3" loop></audio>
 
 <div id="content">
 
   <div class="view-counter">
-    <img src="assets/viewcounter.png">
+    <img src="viewcounter.png">
     <span>[DISABLED]</span>
   </div>
 
@@ -321,12 +284,12 @@
 
     <div class="profile-row">
       <div class="pfp-wrap">
-        <img src="assets/pfp.png" class="profile-pic">
+        <img src="pfp.png" class="profile-pic">
       </div>
 
       <div class="info">
         <div class="name-line">
-          <div id="typedName" class="name"></div>
+          <div class="name" id="typedName"></div>
           <span class="cursor">|</span>
         </div>
         <div class="handle">.nighty_</div>
@@ -336,29 +299,36 @@
     <div class="links">
       <div class="roblox">
         <a href="https://www.roblox.com/users/348101/profile" target="_blank">
-          <img src="assets/robloxbutton.png">
+          <img src="robloxbutton.png">
         </a>
       </div>
 
       <div class="discord">
-        <a href="#"><img src="assets/discordbutton.png"></a>
+        <a href="#"><img src="discordbutton.png"></a>
       </div>
     </div>
 
+  </div>
+
+  <div class="volume-wrap hidden" id="volume">
+    <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
+    <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="setVolume(this.value)">
   </div>
 
 </div>
 
 <script>
 const rain = document.getElementById("rain");
+const volumeUI = document.getElementById("volume");
 
-function spawnRain(container) {
-  for (let i = 0; i < 25; i++) {
-    const drop = document.createElement("div");
-    drop.className = "drop";
-    drop.style.left = Math.random() * 100 + "px";
-    drop.style.animationDuration = (0.8 + Math.random() * 1.2) + "s";
-    drop.style.opacity = Math.random() * 0.6;
+function setVolume(v){ rain.volume = v; }
+
+function spawnRain(container){
+  for(let i=0;i<25;i++){
+    const drop=document.createElement("div");
+    drop.className="drop";
+    drop.style.left=Math.random()*100+"px";
+    drop.style.animationDuration=(0.8+Math.random()*1.2)+"s";
     container.appendChild(drop);
   }
 }
@@ -366,80 +336,73 @@ function spawnRain(container) {
 spawnRain(document.getElementById("leftRain"));
 spawnRain(document.getElementById("rightRain"));
 
-function enterSite() {
+function enterSite(){
   document.querySelector(".intro").classList.add("fade-out");
   document.getElementById("content").classList.add("visible");
 
-  rain.volume = 0.05;
+  volumeUI.classList.remove("hidden");
+
+  rain.volume=0.05;
   rain.play();
 
-  setTimeout(() => {
-    document.querySelector(".intro").style.display = "none";
-  }, 1200);
+  setTimeout(()=>{document.querySelector(".intro").style.display="none";},1200);
 
   animateName();
   animateTitle();
 }
 
-/* SLOW NAME TYPEWRITER */
-const nameText = "Angel";
-let ni = 0;
-let forward = true;
+/* NAME (SLOW) */
+const nameText="Angel";
+let ni=0,nForward=true;
 
-function animateName() {
-  const el = document.getElementById("typedName");
+function animateName(){
+  const el=document.getElementById("typedName");
 
-  if (forward) {
+  if(nForward){
     ni++;
-    el.textContent = nameText.substring(0, ni);
-
-    if (ni === nameText.length) {
-      forward = false;
-      setTimeout(animateName, 1800);
+    el.textContent=nameText.substring(0,ni);
+    if(ni===nameText.length){
+      nForward=false;
+      setTimeout(animateName,1800);
       return;
     }
   } else {
     ni--;
-    el.textContent = nameText.substring(0, ni);
-
-    if (ni === 1) {
-      forward = true;
-      setTimeout(animateName, 1200);
+    el.textContent=nameText.substring(0,ni);
+    if(ni===1){
+      nForward=true;
+      setTimeout(animateName,1600);
       return;
     }
   }
 
-  setTimeout(animateName, 400);
+  setTimeout(animateName,500);
 }
 
-/* TITLE TYPEWRITER (LOOP + REVERSE + CURSOR) */
-const titleText = "Nighty's Bio";
-let ti = 0;
-let tForward = true;
+/* TITLE */
+const titleText="Nighty's Bio";
+let ti=0,tForward=true;
 
-function animateTitle() {
-  let display = titleText.substring(0, ti);
-  document.title = display + "|";
+function animateTitle(){
+  document.title=titleText.substring(0,ti)+"|";
 
-  if (tForward) {
+  if(tForward){
     ti++;
-
-    if (ti === titleText.length) {
-      tForward = false;
-      setTimeout(animateTitle, 1600);
+    if(ti===titleText.length){
+      tForward=false;
+      setTimeout(animateTitle,1800);
       return;
     }
   } else {
     ti--;
-
-    if (ti === 0) {
-      tForward = true;
-      setTimeout(animateTitle, 1000);
+    if(ti===0){
+      tForward=true;
+      setTimeout(animateTitle,1600);
       return;
     }
   }
 
-  setTimeout(animateTitle, 350);
+  setTimeout(animateTitle,500);
 }
 </script>
 

@@ -37,11 +37,11 @@
       z-index: -1;
     }
 
-    /* INTRO (NOW SLIGHTLY TRANSPARENT) */
+    /* INTRO */
     .intro {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85); /* 👈 changed */
+      background: rgba(0, 0, 0, 0.85);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -56,7 +56,7 @@
       opacity: 0;
     }
 
-    /* CONTENT */
+    /* MAIN CONTENT */
     #content {
       opacity: 0;
       filter: blur(12px);
@@ -70,13 +70,26 @@
       transform: translateY(0);
     }
 
-    /* PROFILE */
+    /* MAIN FRAME (PFP + NAME) */
+    .profile-frame {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 25px 35px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(0,0,0,0.25);
+      border-radius: 18px;
+      backdrop-filter: blur(6px);
+      margin-bottom: 18px;
+    }
+
+    /* PROFILE IMAGE */
     .profile-pic {
       width: 120px;
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 15px; /* tighter */
+      margin-bottom: 15px;
       box-shadow: 0 0 20px rgba(255,255,255,0.6);
     }
 
@@ -84,8 +97,16 @@
     .name {
       font-size: 2.5rem;
       font-weight: 900;
-      margin-bottom: 18px; /* tighter */
       letter-spacing: 1px;
+    }
+
+    /* BUTTON FRAME */
+    .button-frame {
+      padding: 12px 20px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(0,0,0,0.25);
+      border-radius: 14px;
+      backdrop-filter: blur(6px);
     }
 
     /* ROBLOX */
@@ -114,14 +135,24 @@
   <!-- CONTENT -->
   <div id="content">
 
-    <img src="pfp.png" class="profile-pic">
+    <!-- PROFILE FRAME -->
+    <div class="profile-frame">
 
-    <div class="name">Angel</div>
+      <img src="pfp.png" class="profile-pic">
 
-    <div class="roblox">
-      <a href="https://www.roblox.com/users/348101/profile" target="_blank">
-        <img src="robloxbutton.png" alt="Roblox">
-      </a>
+      <div class="name">Angel</div>
+
+    </div>
+
+    <!-- BUTTON FRAME -->
+    <div class="button-frame">
+
+      <div class="roblox">
+        <a href="https://www.roblox.com/users/348101/profile" target="_blank">
+          <img src="robloxbutton.png" alt="Roblox">
+        </a>
+      </div>
+
     </div>
 
   </div>

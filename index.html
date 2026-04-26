@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>@</title>
 
   <link rel="icon" href="icon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap" rel="stylesheet">
@@ -35,6 +35,7 @@
       z-index: -3;
     }
 
+    /* FOG */
     .fog {
       position: fixed;
       inset: 0;
@@ -57,6 +58,42 @@
       100% { transform: translate(0px, 0px); }
     }
 
+    /* 🌧 LEFT + RIGHT PARTICLES */
+    .rain-side {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .left { left: 0; }
+    .right { right: 0; }
+
+    .drop {
+      position: absolute;
+      width: 2px;
+      height: 14px;
+      background: rgba(255,255,255,0.6);
+      opacity: 0.6;
+      animation: fall linear infinite;
+      border-radius: 999px;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      10% { opacity: 0.7; }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
     /* INTRO */
     .intro {
       position: fixed;
@@ -70,7 +107,7 @@
       z-index: 100;
 
       cursor: pointer;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: rgba(255,255,255,0.75);
 
       transition: opacity 1.2s ease;
@@ -96,28 +133,28 @@
       transform: translateY(0);
     }
 
-    /* VIEW COUNTER (slightly up) */
+    /* VIEW COUNTER (slightly UP) */
     .view-counter {
-      margin-bottom: 18px;
-
-      padding: 7px 12px;
-      border-radius: 16px;
-
-      background: rgba(0,0,0,0.10);
-
-      border: 1px solid rgba(255, 170, 210, 0.45);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.18),
-        0 0 12px rgba(255,255,255,0.08);
-
-      backdrop-filter: blur(12px);
-
       display: flex;
       align-items: center;
       gap: 8px;
 
-      font-size: 0.9rem;
+      margin-bottom: 18px; /* was 12 → moved UP visually */
+
+      padding: 6px 10px;
+      border-radius: 16px;
+
+      background: rgba(0,0,0,0.10);
+      border: 1px solid rgba(255, 170, 210, 0.45);
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 14px rgba(255,255,255,0.08);
+
+      backdrop-filter: blur(12px);
+
       color: rgba(255,255,255,0.75);
+      font-size: 0.85rem;
     }
 
     .view-counter img {
@@ -125,14 +162,14 @@
       height: 16px;
     }
 
-    /* CARD (ONLY SLIGHTLY BIGGER, NOT BLOWN UP) */
+    /* CARD */
     .card {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 22px;
 
-      padding: 26px 38px; /* slightly reduced */
+      padding: 24px 36px;
       border-radius: 38px;
 
       background: rgba(0,0,0,0.12);
@@ -151,15 +188,18 @@
 
     @keyframes float {
       0% { transform: translateY(0px); }
-      50% { transform: translateY(-6px); }
+      50% { transform: translateY(-8px); }
       100% { transform: translateY(0px); }
     }
 
     /* PFP */
     .pfp-wrap {
       position: relative;
-      width: 102px; /* was larger before */
-      height: 102px;
+      width: 95px;
+      height: 95px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .pfp-wrap::after {
@@ -184,9 +224,10 @@
     }
 
     .profile-pic {
-      width: 102px;
-      height: 102px;
+      width: 95px;
+      height: 95px;
       border-radius: 50%;
+      object-fit: cover;
     }
 
     .profile-row {
@@ -195,8 +236,20 @@
       gap: 22px;
     }
 
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .name-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .name {
-      font-size: 2.05rem;
+      font-size: 2rem;
       font-weight: 900;
     }
 
@@ -207,40 +260,79 @@
       50%{opacity:0;}
     }
 
+    .badge img { width: 20px; }
+
+    .handle { color: rgba(255,255,255,0.75); }
+
+    /* BUTTONS */
+    .links {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
     .roblox img,
     .discord img {
-      width: 32px;
+      width: 30px;
       border-radius: 10px;
       padding: 4px;
+
       border: 1px solid rgba(255, 170, 210, 0.45);
+
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
         0 0 10px rgba(255,255,255,0.08);
+
       transition: 0.2s;
     }
 
     .roblox img:hover,
     .discord img:hover {
-      transform: scale(1.12);
+      transform: scale(1.15);
     }
 
-    /* VOLUME */
-    .volume-wrap {
-      margin-top: 20px;
-      padding: 6px 10px;
+    .discord { position: relative; z-index: 9999; }
 
+    .discord::after {
+      content: "discord .nighty_";
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+
+      background: rgba(0,0,0,0.45);
+      padding: 3px 7px;
+      border-radius: 6px;
+
+      opacity: 0;
+      transition: 0.2s;
+    }
+
+    .discord:hover::after {
+      opacity: 1;
+    }
+
+    /* VOLUME (slightly LOWER) */
+    .volume-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      margin-top: 22px; /* was 14 → moved DOWN */
+
+      padding: 6px 10px;
       border-radius: 14px;
+
       background: rgba(0,0,0,0.10);
 
       border: 1px solid rgba(255, 170, 210, 0.45);
 
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
-        0 0 10px rgba(255,255,255,0.08);
+        0 0 12px rgba(255,255,255,0.08);
 
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      backdrop-filter: blur(12px);
     }
 
     .volume-wrap img {
@@ -250,7 +342,25 @@
     }
 
     input[type="range"] {
-      width: 80px;
+      width: 70px;
+      height: 2px;
+
+      appearance: none;
+      background: rgba(255, 170, 210, 0.4);
+      border-radius: 999px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffd1e8;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -260,6 +370,10 @@
 <div class="bg"></div>
 <div class="overlay"></div>
 <div class="fog"></div>
+
+<!-- 🌧 SIDE RAIN -->
+<div class="rain-side left" id="leftRain"></div>
+<div class="rain-side right" id="rightRain"></div>
 
 <div class="intro" onclick="enterSite()">click to enter &lt;3</div>
 
@@ -279,27 +393,69 @@
         <img src="pfp.png" class="profile-pic">
       </div>
 
-      <div>
-        <div class="name" id="titleName"></div>
-        <div style="opacity:0.75;">.nighty_</div>
+      <div class="info">
+        <div class="name-line">
+          <div id="typedName" class="name"></div>
+          <span class="cursor">|</span>
+          <div class="badge">
+            <img src="badge1.gif">
+          </div>
+        </div>
+
+        <div class="handle">.nighty_</div>
       </div>
     </div>
 
     <div class="links">
-      <a href="#"><img src="robloxbutton.png"></a>
-      <a href="#"><img src="discordbutton.png"></a>
+      <div class="roblox">
+        <a href="https://www.roblox.com/users/348101/profile" target="_blank">
+          <img src="robloxbutton.png">
+        </a>
+      </div>
+
+      <div class="discord">
+        <a href="#"><img src="discordbutton.png"></a>
+      </div>
     </div>
 
+  </div>
+
+  <div class="volume-wrap hidden" id="volume">
+    <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
+    <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="setVolume(this.value)">
   </div>
 
 </div>
 
 <script>
 const rain = document.getElementById("rain");
+const volumeUI = document.getElementById("volume");
+
+function setVolume(v) {
+  rain.volume = v;
+}
+
+function spawnRain(container) {
+  for (let i = 0; i < 25; i++) {
+    const drop = document.createElement("div");
+    drop.className = "drop";
+
+    drop.style.left = Math.random() * 100 + "px";
+    drop.style.animationDuration = (0.8 + Math.random() * 1.2) + "s";
+    drop.style.opacity = Math.random() * 0.6;
+
+    container.appendChild(drop);
+  }
+}
+
+spawnRain(document.getElementById("leftRain"));
+spawnRain(document.getElementById("rightRain"));
 
 function enterSite() {
   document.querySelector(".intro").classList.add("fade-out");
   document.getElementById("content").classList.add("visible");
+
+  volumeUI.classList.remove("hidden");
 
   rain.volume = 0.05;
   rain.play();
@@ -308,38 +464,38 @@ function enterSite() {
     document.querySelector(".intro").style.display = "none";
   }, 1200);
 
-  titleLoop();
+  animateName();
 }
 
-/* TITLE LOOP FIXED */
-const text = "Nighty's Bio";
-const el = document.getElementById("titleName");
+/* TYPEWRITER */
+const nameText = "Angel";
+let ni = 0;
+let nForward = true;
 
-let i = 0;
-let deleting = false;
+function animateName() {
+  const el = document.getElementById("typedName");
 
-function titleLoop() {
-  if (!deleting) {
-    i++;
-    el.textContent = text.substring(0, i) + "|";
+  if (nForward) {
+    ni++;
+    el.textContent = nameText.substring(0, ni);
 
-    if (i === text.length) {
-      deleting = true;
-      setTimeout(titleLoop, 1200);
+    if (ni === nameText.length) {
+      nForward = false;
+      setTimeout(animateName, 1200);
       return;
     }
   } else {
-    i--;
-    el.textContent = text.substring(0, i) + "|";
+    ni--;
+    el.textContent = nameText.substring(0, ni);
 
-    if (i === 1) {
-      deleting = false;
-      setTimeout(titleLoop, 400);
+    if (ni === 1) {
+      nForward = true;
+      setTimeout(animateName, 900);
       return;
     }
   }
 
-  setTimeout(titleLoop, deleting ? 60 : 110);
+  setTimeout(animateName, 220);
 }
 </script>
 

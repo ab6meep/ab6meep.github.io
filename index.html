@@ -18,21 +18,50 @@
       color: white;
     }
 
+    /* BACKGROUND */
     .bg {
       position: fixed;
       inset: 0;
       background: url("background1.gif") center/cover no-repeat;
       filter: blur(6px) brightness(0.6);
       transform: scale(1.05);
-      z-index: -2;
+      z-index: -3;
     }
 
-    /* DARKER + SOFT 85% FEEL */
     .overlay {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.78);
+      z-index: -2;
+    }
+
+    /* 🌫 FOG LAYER */
+    .fog {
+      position: fixed;
+      inset: 0;
+      background: url("https://i.imgur.com/rKQdYbK.png");
+      background-size: cover;
+      opacity: 0.18;
+      animation: fogMove 18s linear infinite;
       z-index: -1;
+      pointer-events: none;
+    }
+
+    @keyframes fogMove {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-80px); }
+      100% { transform: translateX(0); }
+    }
+
+    /* 🌾 GRAIN OVERLAY */
+    .grain {
+      position: fixed;
+      inset: 0;
+      background: url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
+      opacity: 0.06;
+      z-index: 5;
+      pointer-events: none;
+      mix-blend-mode: overlay;
     }
 
     /* CLICK SCREEN */
@@ -74,11 +103,27 @@
       transform: translateY(0);
     }
 
-    /* PROFILE CARD */
+    /* 🔊 VOLUME WHEEL */
+    .volume-wrap {
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+
+      color: rgba(255,255,255,0.7);
+      font-size: 0.75rem;
+    }
+
+    input[type="range"] {
+      width: 120px;
+      accent-color: white;
+      cursor: pointer;
+    }
+
+    /* CARD */
     .card {
       position: relative;
-      overflow: hidden;
-
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -91,8 +136,6 @@
       border: 1px solid rgba(255,255,255,0.15);
 
       backdrop-filter: blur(6px);
-
-      box-shadow: 0 0 25px rgba(0,0,0,0.25);
 
       animation: float 6s ease-in-out infinite;
     }
@@ -119,14 +162,10 @@
 
     @keyframes glowPulse {
       0%, 100% {
-        box-shadow:
-          0 0 20px rgba(255,255,255,0.6),
-          0 0 40px rgba(255,255,255,0.3);
+        box-shadow: 0 0 20px rgba(255,255,255,0.5);
       }
       50% {
-        box-shadow:
-          0 0 30px rgba(255,255,255,0.8),
-          0 0 60px rgba(255,255,255,0.4);
+        box-shadow: 0 0 40px rgba(255,255,255,0.8);
       }
     }
 
@@ -179,7 +218,6 @@
       transform: scale(1.15);
     }
 
-    /* DISCORD HOVER */
     .discord {
       position: relative;
       display: inline-block;
@@ -202,9 +240,8 @@
       border-radius: 6px;
 
       opacity: 0;
+      transition: 0.2s;
       pointer-events: none;
-      transition: 0.2s ease;
-
       z-index: 99999;
     }
 
@@ -217,7 +254,6 @@
       display: flex;
       align-items: center;
       gap: 8px;
-
       margin-top: 14px;
 
       padding: 6px 10px;
@@ -226,30 +262,13 @@
       background: rgba(0,0,0,0.25);
       border: 1px solid rgba(255,255,255,0.15);
 
-      backdrop-filter: blur(6px);
-
       color: rgba(255,255,255,0.75);
       font-size: 0.85rem;
+      backdrop-filter: blur(6px);
     }
 
     .view-counter img {
       width: 16px;
-      height: 16px;
-      opacity: 0.9;
-    }
-
-    .audio-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 8px 14px;
-      background: rgba(0,0,0,0.25);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 10px;
-      display: none;
-      color: white;
-      cursor: pointer;
-      z-index: 30;
     }
   </style>
 </head>
@@ -258,12 +277,19 @@
 
 <div class="bg"></div>
 <div class="overlay"></div>
+<div class="fog"></div>
+<div class="grain"></div>
 
 <div class="intro" onclick="enterSite()">click to enter &lt;3</div>
 
 <audio id="rain" src="rain.mp3" loop></audio>
 
 <div id="content">
+
+  <!-- 🔊 VOLUME CONTROL -->
+  <div class="volume-wrap">
+    <input type="range" min="0" max="1" step="0.01" value="0.2" oninput="setVolume(this.value)">
+  </div>
 
   <div class="card">
 
@@ -306,32 +332,22 @@
 
 </div>
 
-<button class="audio-btn" onclick="toggleAudio()">mute</button>
-
 <script>
+const rain = document.getElementById("rain");
+
+function setVolume(v) {
+  rain.volume = v;
+}
+
 function enterSite() {
   const intro = document.querySelector(".intro");
   const content = document.getElementById("content");
-  const rain = document.getElementById("rain");
-  const btn = document.querySelector(".audio-btn");
 
   intro.classList.add("fade-out");
   content.classList.add("visible");
 
-  rain.volume = 0;
+  rain.volume = 0.2;
   rain.play();
-
-  let vol = 0;
-  const fade = setInterval(() => {
-    if (vol < 0.2) {
-      vol += 0.02;
-      rain.volume = vol;
-    } else {
-      clearInterval(fade);
-    }
-  }, 100);
-
-  btn.style.display = "block";
 
   setTimeout(() => {
     intro.style.display = "none";
@@ -339,49 +355,6 @@ function enterSite() {
 
   animateName();
 }
-
-function toggleAudio() {
-  const rain = document.getElementById("rain");
-  const btn = document.querySelector(".audio-btn");
-
-  if (rain.paused) {
-    rain.play();
-    btn.innerText = "mute";
-  } else {
-    rain.pause();
-    btn.innerText = "unmute";
-  }
-}
-
-/* TITLE */
-const text = "@Nighty.wtf";
-let i = 1;
-let forward = true;
-
-function animateTitle() {
-  if (forward) {
-    i++;
-    document.title = text.substring(0, i);
-
-    if (i === text.length) {
-      forward = false;
-      setTimeout(animateTitle, 1000);
-      return;
-    }
-  } else {
-    i--;
-    document.title = text.substring(0, i);
-
-    if (i === 1) {
-      forward = true;
-      setTimeout(animateTitle, 1000);
-      return;
-    }
-  }
-
-  setTimeout(animateTitle, 1000);
-}
-animateTitle();
 
 /* TYPEWRITER */
 const nameText = "Angel";

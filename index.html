@@ -35,7 +35,7 @@
       z-index: -2;
     }
 
-    /* 🌫 CSS FOG (no images) */
+    /* 🌫 FOG */
     .fog {
       position: fixed;
       inset: 0;
@@ -177,10 +177,33 @@
       100% { transform: translateY(0px); }
     }
 
-    .profile-row {
+    /* 🧿 PFP WRAPPER + RING */
+    .pfp-wrap {
+      position: relative;
+      width: 95px;
+      height: 95px;
       display: flex;
       align-items: center;
-      gap: 22px;
+      justify-content: center;
+    }
+
+    .pfp-wrap::after {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+
+      border: 1px solid rgba(255,255,255,0.35);
+      box-shadow:
+        0 0 10px rgba(255,255,255,0.15),
+        inset 0 0 10px rgba(255,255,255,0.08);
+
+      animation: ringSpin 10s linear infinite;
+    }
+
+    @keyframes ringSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .profile-pic {
@@ -194,6 +217,12 @@
     @keyframes glowPulse {
       0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.5); }
       50% { box-shadow: 0 0 40px rgba(255,255,255,0.8); }
+    }
+
+    .profile-row {
+      display: flex;
+      align-items: center;
+      gap: 22px;
     }
 
     .info {
@@ -298,7 +327,6 @@
       height: 16px;
     }
 
-    /* hidden until enter */
     .hidden {
       opacity: 0;
       pointer-events: none;
@@ -327,7 +355,9 @@
   <div class="card">
 
     <div class="profile-row">
-      <img src="pfp.png" class="profile-pic">
+      <div class="pfp-wrap">
+        <img src="pfp.png" class="profile-pic">
+      </div>
 
       <div class="info">
         <div class="name-line">

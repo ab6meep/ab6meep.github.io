@@ -1,123 +1,206 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>@</title>
 
   <link rel="icon" href="assets/icon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap" rel="stylesheet">
 
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  font-family: 'Source Sans 3', Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Source Sans 3', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
 
-/* BACKGROUND */
-.bg {
-  position: fixed;
-  inset: 0;
-  background: url("assets/background1.gif") center/cover no-repeat;
-  filter: blur(6px) brightness(0.55);
-  transform: scale(1.05);
-  z-index: -4;
-}
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url("assets/background1.gif") center/cover no-repeat;
+      filter: blur(6px) brightness(0.55);
+      transform: scale(1.05);
+      z-index: -4;
+    }
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.82);
-  z-index: -3;
-}
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: -3;
+    }
 
-/* FOG (same as old) */
-.fog {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 40%),
-    radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05), transparent 45%),
-    radial-gradient(circle at 40% 80%, rgba(255,255,255,0.04), transparent 50%);
-  filter: blur(40px);
-  opacity: 0.9;
-}
+    .fog {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
 
-/* CARD (restored old feel) */
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 22px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05), transparent 45%),
+        radial-gradient(circle at 40% 80%, rgba(255,255,255,0.04), transparent 50%);
 
-  padding: 24px 36px;
-  border-radius: 38px;
+      filter: blur(40px);
+      opacity: 0.9;
+      animation: fogDrift 20s ease-in-out infinite;
+    }
 
-  background: rgba(0,0,0,0.12);
-  border: 1px solid rgba(255, 170, 210, 0.50);
+    @keyframes fogDrift {
+      0% { transform: translate(0px, 0px); }
+      50% { transform: translate(-40px, 20px); }
+      100% { transform: translate(0px, 0px); }
+    }
 
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.18),
-    0 0 16px rgba(255,255,255,0.10),
-    0 0 18px rgba(255, 170, 210, 0.10);
+    .rain-side {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
 
-  backdrop-filter: blur(14px);
-}
+    .left { left: 0; }
+    .right { right: 0; }
 
-/* PFP (same as old) */
-.pfp-wrap {
-  position: relative;
-  width: 95px;
-  height: 95px;
-}
+    .drop {
+      position: absolute;
+      width: 2px;
+      height: 14px;
+      background: rgba(255,255,255,0.6);
+      opacity: 0.6;
+      animation: fall linear infinite;
+      border-radius: 999px;
+    }
 
-.profile-pic {
-  width: 95px;
-  height: 95px;
-  border-radius: 50%;
-}
+    @keyframes fall {
+      0% { transform: translateY(-20px); opacity: 0; }
+      10% { opacity: 0.7; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
 
-/* NAME */
-.name {
-  font-size: 2rem;
-  font-weight: 900;
-}
+    .intro {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      cursor: pointer;
+      font-size: 1.4rem;
+      color: rgba(255,255,255,0.75);
+      transition: opacity 1.2s ease;
+    }
 
-.cursor {
-  animation: blink 1s infinite;
-}
+    .intro.fade-out { opacity: 0; }
 
-@keyframes blink {
-  0%,100%{opacity:1;}
-  50%{opacity:0;}
-}
+    #content {
+      opacity: 0;
+      filter: blur(12px);
+      transform: translateY(10px);
+      transition: 1.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-/* BUTTONS FIXED (old sizing restored) */
-.links {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
+    #content.visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
 
-.links img {
-  width: 30px;
-  height: 30px;
-  padding: 4px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 170, 210, 0.45);
-  transition: 0.2s;
-}
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
 
-.links img:hover {
-  transform: scale(1.15);
-}
-</style>
+      padding: 24px 36px;
+      border-radius: 38px;
+
+      background: rgba(0,0,0,0.12);
+      border: 1px solid rgba(255, 170, 210, 0.50);
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 16px rgba(255,255,255,0.10),
+        0 0 18px rgba(255, 170, 210, 0.10);
+
+      backdrop-filter: blur(14px);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .pfp-wrap {
+      position: relative;
+      width: 95px;
+      height: 95px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-pic {
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .name {
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .cursor { animation: blink 1s infinite; }
+
+    @keyframes blink {
+      0%,100%{opacity:1;}
+      50%{opacity:0;}
+    }
+
+    .links img {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      padding: 3px;
+      border: 1px solid rgba(255, 170, 210, 0.45);
+      transition: 0.2s;
+    }
+
+    .links img:hover {
+      transform: scale(1.12);
+    }
+
+    .volume-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 22px;
+      padding: 6px 10px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.10);
+      border: 1px solid rgba(255, 170, 210, 0.45);
+      backdrop-filter: blur(12px);
+    }
+
+    input[type="range"] {
+      width: 70px;
+    }
+  </style>
 </head>
 
 <body>
@@ -126,21 +209,27 @@ body {
 <div class="overlay"></div>
 <div class="fog"></div>
 
+<div class="rain-side left" id="leftRain"></div>
+<div class="rain-side right" id="rightRain"></div>
+
+<div class="intro" onclick="enterSite()">click to enter &lt;3</div>
+
 <audio id="rain" src="sounds/rain.mp3" loop></audio>
 
 <div id="content">
+
   <div class="card">
 
-    <div style="display:flex; align-items:center; gap:20px;">
+    <div class="pfp-wrap">
       <img src="assets/pfp.png" class="profile-pic">
+    </div>
 
-      <div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <div id="typedName" class="name"></div>
-          <span class="cursor">|</span>
-        </div>
-        <div style="opacity:0.7;">.nighty_</div>
+    <div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div id="typedName" class="name"></div>
+        <span class="cursor">|</span>
       </div>
+      <div style="opacity:0.7;">.nighty_</div>
     </div>
 
     <div class="links">
@@ -149,57 +238,68 @@ body {
     </div>
 
   </div>
+
 </div>
 
 <script>
-/* ===== RAIN ===== */
 const rain = document.getElementById("rain");
-rain.volume = 0.05;
 
-/* ===== TITLE TYPEWRITER (FIXED REVERSE LOOP) ===== */
-const text = "Nighty's bio";
-let i = 0;
-let forward = true;
-
-function animateTitle() {
-  document.title = text.substring(0, i) + " |";
-
-  if (forward) {
-    i++;
-    if (i > text.length) {
-      forward = false;
-      setTimeout(animateTitle, 800);
-      return;
-    }
-  } else {
-    i--;
-    if (i < 0) {
-      forward = true;
-      i = 0;
-    }
+function spawnRain(container) {
+  for (let i = 0; i < 25; i++) {
+    const d = document.createElement("div");
+    d.className = "drop";
+    d.style.left = Math.random() * 100 + "px";
+    d.style.animationDuration = (0.8 + Math.random()) + "s";
+    container.appendChild(d);
   }
-
-  setTimeout(animateTitle, 180);
 }
 
-/* ===== NAME ANIMATION (simple clean loop) ===== */
-let ni = 0;
-function animateName() {
-  document.getElementById("typedName").textContent =
-    text.substring(0, ni);
+spawnRain(leftRain);
+spawnRain(rightRain);
 
-  ni = (ni + 1) % (text.length + 1);
-  setTimeout(animateName, 200);
-}
+function enterSite() {
+  document.querySelector(".intro").classList.add("fade-out");
+  document.getElementById("content").classList.add("visible");
 
-/* START */
-function enter() {
+  rain.volume = 0.05;
   rain.play();
-  animateTitle();
+
+  setTimeout(() => {
+    document.querySelector(".intro").style.display = "none";
+  }, 1200);
+
   animateName();
 }
 
-enter();
+const nameText = "Angel";
+let ni = 0;
+let forward = true;
+
+function animateName() {
+  const el = document.getElementById("typedName");
+
+  if (forward) {
+    ni++;
+    el.textContent = nameText.substring(0, ni);
+
+    if (ni === nameText.length) {
+      forward = false;
+      setTimeout(animateName, 1200);
+      return;
+    }
+  } else {
+    ni--;
+    el.textContent = nameText.substring(0, ni);
+
+    if (ni === 1) {
+      forward = true;
+      setTimeout(animateName, 900);
+      return;
+    }
+  }
+
+  setTimeout(animateName, 220);
+}
 </script>
 
 </body>

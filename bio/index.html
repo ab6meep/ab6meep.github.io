@@ -230,6 +230,26 @@
       align-items: center;
     }
 
+    .roblox img,
+    .discord img {
+      width: 30px;
+      border-radius: 10px;
+      padding: 4px;
+
+      border: 1px solid rgba(255, 170, 210, 0.45);
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 10px rgba(255,255,255,0.08);
+
+      transition: 0.2s;
+    }
+
+    .roblox img:hover,
+    .discord img:hover {
+      transform: scale(1.15);
+    }
+
     .discord {
       position: relative;
     }
@@ -336,6 +356,11 @@
     </div>
 
     <div class="links">
+      <div class="roblox">
+        <a href="https://www.roblox.com/users/348101/profile" target="_blank">
+          <img src="assets/robloxbutton.png">
+        </a>
+      </div>
       <div class="discord">
         <img src="assets/discordbutton.png">
       </div>

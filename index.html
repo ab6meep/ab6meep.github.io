@@ -16,7 +16,6 @@
       align-items: center;
       justify-content: center;
       color: white;
-      transform: scale(1.05); /* 🔼 slight global scale up */
     }
 
     /* BACKGROUND */
@@ -41,10 +40,12 @@
       inset: 0;
       z-index: -2;
       pointer-events: none;
+
       background:
         radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 40%),
         radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05), transparent 45%),
         radial-gradient(circle at 40% 80%, rgba(255,255,255,0.04), transparent 50%);
+
       filter: blur(40px);
       opacity: 0.9;
       animation: fogDrift 20s ease-in-out infinite;
@@ -69,7 +70,7 @@
       z-index: 100;
 
       cursor: pointer;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: rgba(255,255,255,0.75);
 
       transition: opacity 1.2s ease;
@@ -95,44 +96,44 @@
       transform: translateY(0);
     }
 
-    /* VIEW COUNTER (bigger) */
+    /* VIEW COUNTER (slightly up) */
     .view-counter {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      margin-bottom: 18px;
 
-      margin-bottom: 20px;
-
-      padding: 8px 14px;
-      border-radius: 18px;
+      padding: 7px 12px;
+      border-radius: 16px;
 
       background: rgba(0,0,0,0.10);
-      border: 1px solid rgba(255, 170, 210, 0.45);
 
+      border: 1px solid rgba(255, 170, 210, 0.45);
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
-        0 0 14px rgba(255,255,255,0.08);
+        0 0 12px rgba(255,255,255,0.08);
 
       backdrop-filter: blur(12px);
 
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      font-size: 0.9rem;
       color: rgba(255,255,255,0.75);
-      font-size: 0.95rem;
     }
 
     .view-counter img {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
     }
 
-    /* CARD (bigger) */
+    /* CARD (ONLY SLIGHTLY BIGGER, NOT BLOWN UP) */
     .card {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 26px;
+      gap: 22px;
 
-      padding: 30px 44px;
-      border-radius: 42px;
+      padding: 26px 38px; /* slightly reduced */
+      border-radius: 38px;
 
       background: rgba(0,0,0,0.12);
 
@@ -140,8 +141,8 @@
 
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
-        0 0 18px rgba(255,255,255,0.10),
-        0 0 22px rgba(255, 170, 210, 0.10);
+        0 0 16px rgba(255,255,255,0.10),
+        0 0 18px rgba(255, 170, 210, 0.10);
 
       backdrop-filter: blur(14px);
 
@@ -150,32 +151,29 @@
 
     @keyframes float {
       0% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-6px); }
       100% { transform: translateY(0px); }
     }
 
     /* PFP */
     .pfp-wrap {
       position: relative;
-      width: 110px;
-      height: 110px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 102px; /* was larger before */
+      height: 102px;
     }
 
     .pfp-wrap::after {
       content: "";
       position: absolute;
-      inset: -8px;
+      inset: -7px;
       border-radius: 50%;
 
       border: 1px solid rgba(255, 170, 210, 0.55);
 
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
-        0 0 16px rgba(255,255,255,0.10),
-        0 0 18px rgba(255, 170, 210, 0.20);
+        0 0 14px rgba(255,255,255,0.10),
+        0 0 16px rgba(255, 170, 210, 0.20);
 
       animation: ringSpin 10s linear infinite;
     }
@@ -186,20 +184,19 @@
     }
 
     .profile-pic {
-      width: 110px;
-      height: 110px;
+      width: 102px;
+      height: 102px;
       border-radius: 50%;
-      object-fit: cover;
     }
 
     .profile-row {
       display: flex;
       align-items: center;
-      gap: 26px;
+      gap: 22px;
     }
 
     .name {
-      font-size: 2.2rem;
+      font-size: 2.05rem;
       font-weight: 900;
     }
 
@@ -210,12 +207,11 @@
       50%{opacity:0;}
     }
 
-    /* BUTTONS slightly bigger */
     .roblox img,
     .discord img {
-      width: 34px;
-      border-radius: 12px;
-      padding: 5px;
+      width: 32px;
+      border-radius: 10px;
+      padding: 4px;
       border: 1px solid rgba(255, 170, 210, 0.45);
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
@@ -225,39 +221,36 @@
 
     .roblox img:hover,
     .discord img:hover {
-      transform: scale(1.15);
+      transform: scale(1.12);
     }
 
-    /* VOLUME slightly bigger */
+    /* VOLUME */
     .volume-wrap {
-      margin-top: 24px;
+      margin-top: 20px;
+      padding: 6px 10px;
 
-      padding: 8px 12px;
-      border-radius: 16px;
-
+      border-radius: 14px;
       background: rgba(0,0,0,0.10);
 
       border: 1px solid rgba(255, 170, 210, 0.45);
 
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.18),
-        0 0 12px rgba(255,255,255,0.08);
-
-      backdrop-filter: blur(12px);
+        0 0 10px rgba(255,255,255,0.08);
 
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .volume-wrap img {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       filter: brightness(0) invert(1);
     }
 
     input[type="range"] {
-      width: 90px;
+      width: 80px;
     }
   </style>
 </head>
@@ -318,7 +311,7 @@ function enterSite() {
   titleLoop();
 }
 
-/* 🎯 TITLE TYPE + DELETE LOOP */
+/* TITLE LOOP FIXED */
 const text = "Nighty's Bio";
 const el = document.getElementById("titleName");
 
@@ -346,7 +339,7 @@ function titleLoop() {
     }
   }
 
-  setTimeout(titleLoop, deleting ? 60 : 120);
+  setTimeout(titleLoop, deleting ? 60 : 110);
 }
 </script>
 

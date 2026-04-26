@@ -70,7 +70,7 @@
       transform: translateY(0);
     }
 
-    /* TOP ROW (PFP + BADGES) */
+    /* TOP ROW */
     .top-row {
       display: flex;
       align-items: center;
@@ -79,30 +79,27 @@
       margin-bottom: 15px;
     }
 
-    /* PROFILE IMAGE */
     .profile-pic {
       width: 120px;
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 0 20px rgba(255,255,255,0.6);
+      box-shadow: 0 0 20px rgba(255,255,255,0.35);
     }
 
-    /* BADGES FRAME */
+    /* BADGES (MORE TRANSPARENT) */
     .badges-frame {
       display: flex;
       gap: 8px;
       padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.08);
       border-radius: 12px;
       backdrop-filter: blur(6px);
-      align-items: center;
     }
 
     .badges-frame img {
       width: 28px;
-      height: 28px;
       transition: 0.2s ease;
     }
 
@@ -118,11 +115,11 @@
       margin-bottom: 20px;
     }
 
-    /* BUTTON FRAME */
+    /* BUTTON FRAME (MORE TRANSPARENT) */
     .button-frame {
       padding: 6px 18px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.08);
       border-radius: 14px;
       backdrop-filter: blur(6px);
     }
@@ -137,6 +134,21 @@
       transform: scale(1.2);
     }
 
+    /* MUTE BUTTON */
+    .audio-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.2);
+      color: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+    }
+
   </style>
 </head>
 
@@ -149,62 +161,99 @@
   <!-- INTRO -->
   <div class="intro" onclick="enterSite()">click to enter</div>
 
+  <!-- AUDIO -->
+  <audio id="rain" src="rain.mp3" loop></audio>
+
   <!-- CONTENT -->
   <div id="content">
 
-    <!-- PFP + BADGES -->
     <div class="top-row">
 
       <img src="pfp.png" class="profile-pic">
 
       <div class="badges-frame">
-        <img src="badge1.png" alt="">
-        <img src="badge2.png" alt="">
-        <img src="badge3.png" alt="">
+        <img src="badge1.png">
+        <img src="badge2.png">
+        <img src="badge3.png">
       </div>
 
     </div>
 
     <div class="name">Angel</div>
 
-    <!-- BUTTON -->
     <div class="button-frame">
       <div class="roblox">
         <a href="https://www.roblox.com/users/348101/profile" target="_blank">
-          <img src="robloxbutton.png" alt="Roblox">
+          <img src="robloxbutton.png">
         </a>
       </div>
     </div>
 
   </div>
 
+  <!-- MUTE BUTTON -->
+  <button class="audio-btn" onclick="toggleAudio()">mute</button>
+
   <script>
     function enterSite() {
       const intro = document.querySelector(".intro");
       const content = document.getElementById("content");
+      const rain = document.getElementById("rain");
 
       intro.classList.add("fade-out");
       content.classList.add("visible");
+
+      // start rain AFTER click
+      rain.volume = 0.4;
+      rain.play();
 
       setTimeout(() => {
         intro.style.display = "none";
       }, 1200);
     }
 
-    // TITLE TYPE (0.5s per character)
-    const fullText = "nighty.wtf";
-    let i = 0;
+    /* AUDIO TOGGLE */
+    function toggleAudio() {
+      const rain = document.getElementById("rain");
+      const btn = document.querySelector(".audio-btn");
 
-    function typeTitle() {
-      document.title = fullText.substring(0, i);
-      i++;
-
-      if (i <= fullText.length) {
-        setTimeout(typeTitle, 500);
+      if (rain.paused) {
+        rain.play();
+        btn.innerText = "mute";
+      } else {
+        rain.pause();
+        btn.innerText = "unmute";
       }
     }
 
-    typeTitle();
+    /* TITLE TYPE + REVERSE */
+    const text = "nighty.wtf";
+    let i = 0;
+    let forward = true;
+
+    function animateTitle() {
+      if (forward) {
+        i++;
+        document.title = text.substring(0, i);
+
+        if (i === text.length) {
+          forward = false;
+          setTimeout(animateTitle, 1200);
+          return;
+        }
+      } else {
+        i--;
+        document.title = text.substring(0, i);
+
+        if (i === 0) {
+          forward = true;
+        }
+      }
+
+      setTimeout(animateTitle, 180);
+    }
+
+    animateTitle();
   </script>
 
 </body>

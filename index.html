@@ -34,19 +34,21 @@
       z-index: -1;
     }
 
-    /* INTRO (clean black, no border) */
+    /* CLICK SCREEN (smaller + slightly transparent) */
     .intro {
       position: fixed;
       inset: 0;
-      background: #000;
+      background: rgba(0,0,0,0.92);
+
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 50;
 
+      z-index: 50;
       cursor: pointer;
-      font-size: 2rem;
-      color: white;
+
+      font-size: 1.4rem;
+      color: rgba(255,255,255,0.75);
 
       transition: opacity 1.2s ease;
     }
@@ -91,22 +93,6 @@
       0% { transform: translateY(0px); }
       50% { transform: translateY(-8px); }
       100% { transform: translateY(0px); }
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 18px;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent);
-      animation: shine 6s infinite;
-    }
-
-    @keyframes shine {
-      0% { transform: translateX(-100%); opacity: 0; }
-      20% { opacity: 1; }
-      40% { transform: translateX(100%); opacity: 0; }
-      100% { opacity: 0; }
     }
 
     .profile-row {
@@ -166,19 +152,20 @@
 
     .handle { color: rgba(255,255,255,0.75); }
 
-    /* BUTTONS */
+    /* BUTTONS ROW */
     .links {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
     }
 
+    /* SMALLER BUTTONS */
     .roblox img,
     .discord img {
-      width: 38px;
+      width: 30px;
       border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 8px;
-      padding: 5px;
+      border-radius: 7px;
+      padding: 4px;
       transition: 0.2s;
     }
 
@@ -187,7 +174,7 @@
       transform: scale(1.15);
     }
 
-    /* DISCORD HOVER (FORCED ABOVE EVERYTHING) */
+    /* DISCORD HOVER */
     .discord {
       position: relative;
       display: inline-block;
@@ -197,16 +184,16 @@
     .discord::after {
       content: "discord .nighty_";
       position: absolute;
-      bottom: -30px;
+      bottom: -28px;
       left: 50%;
       transform: translateX(-50%);
       white-space: nowrap;
 
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: rgba(255,255,255,0.9);
 
       background: rgba(0,0,0,0.45);
-      padding: 4px 8px;
+      padding: 3px 7px;
       border-radius: 6px;
 
       opacity: 0;
@@ -234,7 +221,7 @@
       z-index: 30;
     }
 
-    /* VIEW COUNTER (BEHIND INTRO) */
+    /* VIEW COUNTER */
     .view-counter {
       position: fixed;
       bottom: 18px;
@@ -254,7 +241,7 @@
       font-size: 0.85rem;
 
       backdrop-filter: blur(6px);
-      z-index: 1; /* hidden under intro */
+      z-index: 1;
     }
 
     .view-counter img {

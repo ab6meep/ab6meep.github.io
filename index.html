@@ -56,7 +56,7 @@
       opacity: 0;
     }
 
-    /* MAIN CONTENT */
+    /* CONTENT */
     #content {
       opacity: 0;
       filter: blur(12px);
@@ -70,20 +70,7 @@
       transform: translateY(0);
     }
 
-    /* MAIN FRAME (PFP + NAME) */
-    .profile-frame {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 25px 35px;
-      border: 1px solid rgba(255,255,255,0.35);
-      background: rgba(0,0,0,0.25);
-      border-radius: 18px;
-      backdrop-filter: blur(6px);
-      margin-bottom: 18px;
-    }
-
-    /* PROFILE IMAGE */
+    /* PROFILE IMAGE (no frame now) */
     .profile-pic {
       width: 120px;
       height: 120px;
@@ -93,18 +80,19 @@
       box-shadow: 0 0 20px rgba(255,255,255,0.6);
     }
 
-    /* NAME */
+    /* NAME (no frame now) */
     .name {
       font-size: 2.5rem;
       font-weight: 900;
       letter-spacing: 1px;
+      margin-bottom: 20px;
     }
 
-    /* BUTTON FRAME */
+    /* BUTTON FRAME (ONLY ONE LEFT) */
     .button-frame {
-      padding: 12px 20px;
-      border: 1px solid rgba(255,255,255,0.35);
-      background: rgba(0,0,0,0.25);
+      padding: 6px 18px; /* thinner vertically */
+      border: 1px solid rgba(255,255,255,0.25); /* lighter border */
+      background: rgba(0,0,0,0.15); /* more transparent */
       border-radius: 14px;
       backdrop-filter: blur(6px);
     }
@@ -135,24 +123,17 @@
   <!-- CONTENT -->
   <div id="content">
 
-    <!-- PROFILE FRAME -->
-    <div class="profile-frame">
+    <img src="pfp.png" class="profile-pic">
 
-      <img src="pfp.png" class="profile-pic">
+    <div class="name">Angel</div>
 
-      <div class="name">Angel</div>
-
-    </div>
-
-    <!-- BUTTON FRAME -->
+    <!-- ONLY FRAME LEFT -->
     <div class="button-frame">
-
       <div class="roblox">
         <a href="https://www.roblox.com/users/348101/profile" target="_blank">
           <img src="robloxbutton.png" alt="Roblox">
         </a>
       </div>
-
     </div>
 
   </div>

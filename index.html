@@ -34,7 +34,7 @@
       z-index: -1;
     }
 
-    /* CLICK SCREEN (smaller + slightly transparent) */
+    /* INTRO */
     .intro {
       position: fixed;
       inset: 0;
@@ -55,11 +55,16 @@
 
     .intro.fade-out { opacity: 0; }
 
+    /* MAIN WRAPPER */
     #content {
       opacity: 0;
       filter: blur(12px);
       transform: translateY(10px);
       transition: 1.2s ease;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     #content.visible {
@@ -68,6 +73,7 @@
       transform: translateY(0);
     }
 
+    /* CARD */
     .card {
       position: relative;
       overflow: hidden;
@@ -152,14 +158,13 @@
 
     .handle { color: rgba(255,255,255,0.75); }
 
-    /* BUTTONS ROW */
+    /* BUTTONS */
     .links {
       display: flex;
       gap: 8px;
       align-items: center;
     }
 
-    /* SMALLER BUTTONS */
     .roblox img,
     .discord img {
       width: 30px;
@@ -207,6 +212,32 @@
       opacity: 1;
     }
 
+    /* VIEW COUNTER (CENTERED UNDER CARD) */
+    .view-counter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      margin-top: 14px;
+
+      padding: 6px 10px;
+      border-radius: 10px;
+
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.15);
+
+      color: rgba(255,255,255,0.75);
+      font-size: 0.85rem;
+
+      backdrop-filter: blur(6px);
+    }
+
+    .view-counter img {
+      width: 16px;
+      height: 16px;
+      opacity: 0.9;
+    }
+
     .audio-btn {
       position: fixed;
       top: 20px;
@@ -219,35 +250,6 @@
       color: white;
       cursor: pointer;
       z-index: 30;
-    }
-
-    /* VIEW COUNTER */
-    .view-counter {
-      position: fixed;
-      bottom: 18px;
-      left: 18px;
-
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 6px 10px;
-      border-radius: 10px;
-
-      background: rgba(0,0,0,0.25);
-      border: 1px solid rgba(255,255,255,0.15);
-
-      color: rgba(255,255,255,0.75);
-      font-size: 0.85rem;
-
-      backdrop-filter: blur(6px);
-      z-index: 1;
-    }
-
-    .view-counter img {
-      width: 16px;
-      height: 16px;
-      opacity: 0.9;
     }
   </style>
 </head>
@@ -262,6 +264,7 @@
 <audio id="rain" src="rain.mp3" loop></audio>
 
 <div id="content">
+
   <div class="card">
 
     <div class="profile-row">
@@ -281,7 +284,6 @@
     </div>
 
     <div class="links">
-
       <div class="roblox">
         <a href="https://www.roblox.com/users/348101/profile" target="_blank">
           <img src="robloxbutton.png">
@@ -293,15 +295,16 @@
           <img src="discordbutton.png">
         </a>
       </div>
-
     </div>
 
   </div>
-</div>
 
-<div class="view-counter">
-  <img src="viewcounter.png">
-  <span>[DISABLED]</span>
+  <!-- VIEW COUNTER (NOW UNDER CARD) -->
+  <div class="view-counter">
+    <img src="viewcounter.png">
+    <span>[DISABLED]</span>
+  </div>
+
 </div>
 
 <button class="audio-btn" onclick="toggleAudio()">mute</button>

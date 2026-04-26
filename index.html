@@ -98,7 +98,7 @@
       transform: translateY(0);
     }
 
-    /* VIEW COUNTER (TOP) */
+    /* VIEW COUNTER */
     .view-counter {
       display: flex;
       align-items: center;
@@ -107,14 +107,21 @@
       margin-bottom: 12px;
 
       padding: 6px 10px;
-      border-radius: 12px;
+      border-radius: 14px;
 
-      background: rgba(0,0,0,0.25);
+      /* 🪟 more transparent glass */
+      background: rgba(0,0,0,0.18);
+
+      /* 💗 inner pink border + 🤍 outer white glow */
       border: 1px solid rgba(255, 170, 210, 0.45);
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),   /* outer white outline */
+        0 0 18px rgba(255,255,255,0.08);    /* soft white glow */
 
       color: rgba(255,255,255,0.75);
       font-size: 0.85rem;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(10px);
     }
 
     .view-counter img {
@@ -130,20 +137,25 @@
       gap: 22px;
 
       padding: 24px 36px;
-      border-radius: 34px;
+      border-radius: 36px;
 
-      background: rgba(0,0,0,0.28);
+      /* 🪟 more transparent */
+      background: rgba(0,0,0,0.18);
 
+      /* 💗 pink border */
       border: 1px solid rgba(255, 170, 210, 0.45);
 
-      backdrop-filter: blur(6px);
+      /* 🤍 outer white outline + soft glow */
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 22px rgba(255,255,255,0.10),
+
+        0 0 18px rgba(255, 170, 210, 0.12),
+        0 0 40px rgba(255, 170, 210, 0.08);
+
+      backdrop-filter: blur(10px);
 
       animation: float 6s ease-in-out infinite;
-
-      /* 💗 soft pink glow */
-      box-shadow:
-        0 0 12px rgba(255, 170, 210, 0.15),
-        0 0 30px rgba(255, 170, 210, 0.10);
     }
 
     @keyframes float {
@@ -192,7 +204,6 @@
       animation: glowPulse 4s ease-in-out infinite;
     }
 
-    /* pink glow */
     @keyframes glowPulse {
       0%, 100% {
         box-shadow:
@@ -291,7 +302,7 @@
       opacity: 1;
     }
 
-    /* VOLUME (BOTTOM) */
+    /* VOLUME */
     .volume-wrap {
       display: flex;
       align-items: center;
@@ -300,12 +311,17 @@
       margin-top: 14px;
 
       padding: 4px 8px;
-      border-radius: 10px;
+      border-radius: 12px;
 
-      background: rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.18);
+
       border: 1px solid rgba(255, 170, 210, 0.45);
 
-      backdrop-filter: blur(6px);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 18px rgba(255,255,255,0.08);
+
+      backdrop-filter: blur(10px);
     }
 
     .volume-wrap img {

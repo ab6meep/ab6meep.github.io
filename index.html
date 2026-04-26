@@ -5,7 +5,6 @@
 
   <link rel="icon" href="icon.png" type="image/png">
 
-  <!-- FONT (normal weight) -->
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap" rel="stylesheet">
 
   <style>
@@ -61,10 +60,6 @@
       filter: blur(12px);
       transform: translateY(10px);
       transition: opacity 1.2s ease, filter 1.2s ease, transform 1.2s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
     }
 
     #content.visible {
@@ -73,13 +68,32 @@
       transform: translateY(0);
     }
 
+    /* ✨ NEW FRAME */
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+
+      padding: 22px 28px;
+      border-radius: 18px;
+
+      background: rgba(255,255,255,0.06); /* barely transparent */
+      backdrop-filter: blur(10px);
+
+      border: 1px solid rgba(255,255,255,0.12);
+
+      box-shadow:
+        0 0 25px rgba(0,0,0,0.35),
+        inset 0 0 20px rgba(255,255,255,0.04);
+    }
+
     .profile-row {
       display: flex;
       align-items: center;
       gap: 16px;
     }
 
-    /* UPDATED PFP */
     .profile-pic {
       width: 95px;
       height: 95px;
@@ -173,29 +187,34 @@
 
   <div id="content">
 
-    <div class="profile-row">
+    <!-- FRAME WRAPPER -->
+    <div class="card">
 
-      <img src="pfp.png" class="profile-pic">
+      <div class="profile-row">
 
-      <div class="info">
+        <img src="pfp.png" class="profile-pic">
 
-        <div class="name-line">
-          <div class="name">Angel</div>
-          <div class="badge">
-            <img src="badge1.gif">
+        <div class="info">
+
+          <div class="name-line">
+            <div class="name">Angel</div>
+            <div class="badge">
+              <img src="badge1.gif">
+            </div>
           </div>
-        </div>
 
-        <div class="handle">.nighty_</div>
+          <div class="handle">.nighty_</div>
+
+        </div>
 
       </div>
 
-    </div>
+      <div class="roblox">
+        <a href="https://www.roblox.com/users/348101/profile" target="_blank">
+          <img src="robloxbutton.png">
+        </a>
+      </div>
 
-    <div class="roblox">
-      <a href="https://www.roblox.com/users/348101/profile" target="_blank">
-        <img src="robloxbutton.png">
-      </a>
     </div>
 
   </div>
@@ -235,7 +254,6 @@
       }
     }
 
-    /* TITLE ANIMATION (1s per letter) */
     const text = "@Nighty.wtf";
     let i = 1;
     let forward = true;

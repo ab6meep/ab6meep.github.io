@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>@</title>
+  <title></title>
 
   <link rel="icon" href="assets/icon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap" rel="stylesheet">
@@ -450,26 +450,14 @@ function spawnRain(container) {
 spawnRain(document.getElementById("leftRain"));
 spawnRain(document.getElementById("rightRain"));
 
-function enterSite() {
-  document.querySelector(".intro").classList.add("fade-out");
-  document.getElementById("content").classList.add("visible");
-
-  volumeUI.classList.remove("hidden");
-
-  rain.volume = 0.05;
-  rain.play();
-
-  setTimeout(() => {
-    document.querySelector(".intro").style.display = "none";
-  }, 1200);
-
-  animateName();
-}
-
 /* TYPEWRITER */
 const nameText = "Angel";
 let ni = 0;
 let nForward = true;
+
+const titleText = "Nighty's Bio";
+let ti = 0;
+let tForward = true;
 
 function animateName() {
   const el = document.getElementById("typedName");
@@ -494,7 +482,50 @@ function animateName() {
     }
   }
 
-  setTimeout(animateName, 220);
+  setTimeout(animateName, 320);
+}
+
+function animateTitle() {
+  const el = document.title;
+
+  if (tForward) {
+    ti++;
+    document.title = titleText.substring(0, ti);
+
+    if (ti === titleText.length) {
+      tForward = false;
+      setTimeout(animateTitle, 1400);
+      return;
+    }
+  } else {
+    ti--;
+    document.title = titleText.substring(0, ti);
+
+    if (ti === 0) {
+      tForward = true;
+      setTimeout(animateTitle, 900);
+      return;
+    }
+  }
+
+  setTimeout(animateTitle, 300);
+}
+
+function enterSite() {
+  document.querySelector(".intro").classList.add("fade-out");
+  document.getElementById("content").classList.add("visible");
+
+  volumeUI.classList.remove("hidden");
+
+  rain.volume = 0.05;
+  rain.play();
+
+  setTimeout(() => {
+    document.querySelector(".intro").style.display = "none";
+  }, 1200);
+
+  animateName();
+  animateTitle();
 }
 </script>
 

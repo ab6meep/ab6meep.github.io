@@ -70,60 +70,39 @@
       transform: translateY(0);
     }
 
-    /* TOP ROW */
-    .top-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-
+    /* PROFILE */
     .profile-pic {
       width: 120px;
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
+      margin-bottom: 20px;
       box-shadow: 0 0 20px rgba(255,255,255,0.35);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* BADGES (MORE TRANSPARENT) */
-    .badges-frame {
+    /* NAME + BADGE */
+    .name-row {
       display: flex;
-      gap: 8px;
-      padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.08);
-      border-radius: 12px;
-      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 25px;
     }
 
-    .badges-frame img {
-      width: 28px;
-      transition: 0.2s ease;
-    }
-
-    .badges-frame img:hover {
-      transform: scale(1.2);
-    }
-
-    /* NAME */
     .name {
       font-size: 2.5rem;
       font-weight: 900;
       letter-spacing: 1px;
-      margin-bottom: 20px;
     }
 
-    /* BUTTON FRAME (MORE TRANSPARENT) */
-    .button-frame {
-      padding: 6px 18px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.08);
-      border-radius: 14px;
-      backdrop-filter: blur(6px);
+    .badge img {
+      width: 26px;
     }
 
+    /* BUTTON */
     .roblox img {
       width: 42px;
       transition: 0.25s ease;
@@ -134,19 +113,19 @@
       transform: scale(1.2);
     }
 
-    /* MUTE BUTTON */
+    /* AUDIO BUTTON (TOP RIGHT, hidden until enter) */
     .audio-btn {
       position: fixed;
-      bottom: 20px;
+      top: 20px;
       right: 20px;
       padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(0,0,0,0.2);
+      background: rgba(0,0,0,0.25);
       color: white;
+      border: none;
       cursor: pointer;
       font-size: 0.9rem;
       border-radius: 10px;
-      backdrop-filter: blur(6px);
+      display: none;
     }
 
   </style>
@@ -167,31 +146,24 @@
   <!-- CONTENT -->
   <div id="content">
 
-    <div class="top-row">
+    <img src="pfp.png" class="profile-pic">
 
-      <img src="pfp.png" class="profile-pic">
-
-      <div class="badges-frame">
+    <div class="name-row">
+      <div class="name">Angel</div>
+      <div class="badge">
         <img src="badge1.png">
-        <img src="badge2.png">
-        <img src="badge3.png">
       </div>
-
     </div>
 
-    <div class="name">Angel</div>
-
-    <div class="button-frame">
-      <div class="roblox">
-        <a href="https://www.roblox.com/users/348101/profile" target="_blank">
-          <img src="robloxbutton.png">
-        </a>
-      </div>
+    <div class="roblox">
+      <a href="https://www.roblox.com/users/348101/profile" target="_blank">
+        <img src="robloxbutton.png">
+      </a>
     </div>
 
   </div>
 
-  <!-- MUTE BUTTON -->
+  <!-- AUDIO BUTTON -->
   <button class="audio-btn" onclick="toggleAudio()">mute</button>
 
   <script>
@@ -199,20 +171,23 @@
       const intro = document.querySelector(".intro");
       const content = document.getElementById("content");
       const rain = document.getElementById("rain");
+      const btn = document.querySelector(".audio-btn");
 
       intro.classList.add("fade-out");
       content.classList.add("visible");
 
-      // start rain AFTER click
-      rain.volume = 0.4;
+      // start rain (quieter)
+      rain.volume = 0.2;
       rain.play();
+
+      // show audio button AFTER enter
+      btn.style.display = "block";
 
       setTimeout(() => {
         intro.style.display = "none";
       }, 1200);
     }
 
-    /* AUDIO TOGGLE */
     function toggleAudio() {
       const rain = document.getElementById("rain");
       const btn = document.querySelector(".audio-btn");
@@ -226,7 +201,7 @@
       }
     }
 
-    /* TITLE TYPE + REVERSE */
+    /* TITLE TYPE (1 letter per second + reverse) */
     const text = "nighty.wtf";
     let i = 0;
     let forward = true;
@@ -238,7 +213,7 @@
 
         if (i === text.length) {
           forward = false;
-          setTimeout(animateTitle, 1200);
+          setTimeout(animateTitle, 1000);
           return;
         }
       } else {
@@ -250,7 +225,7 @@
         }
       }
 
-      setTimeout(animateTitle, 180);
+      setTimeout(animateTitle, 1000);
     }
 
     animateTitle();

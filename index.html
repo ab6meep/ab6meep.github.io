@@ -169,7 +169,15 @@
       color: rgba(255,255,255,0.75);
     }
 
-    .roblox img {
+    /* BUTTONS ROW (clean layout) */
+    .links {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .roblox img,
+    .discord img {
       width: 38px;
       border: 1px solid rgba(255,255,255,0.25);
       border-radius: 8px;
@@ -177,8 +185,39 @@
       transition: 0.2s;
     }
 
-    .roblox img:hover {
+    .roblox img:hover,
+    .discord img:hover {
       transform: scale(1.15);
+    }
+
+    /* DISCORD HOVER TEXT */
+    .discord {
+      position: relative;
+      display: inline-block;
+    }
+
+    .discord::after {
+      content: "discord .nighty_";
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.85);
+
+      background: rgba(0,0,0,0.35);
+      padding: 4px 8px;
+      border-radius: 6px;
+
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.2s ease;
+    }
+
+    .discord:hover::after {
+      opacity: 1;
     }
 
     .audio-btn {
@@ -253,10 +292,21 @@
       </div>
     </div>
 
-    <div class="roblox">
-      <a href="https://www.roblox.com/users/348101/profile" target="_blank">
-        <img src="robloxbutton.png">
-      </a>
+    <!-- CLEAN LINKS ROW -->
+    <div class="links">
+
+      <div class="roblox">
+        <a href="https://www.roblox.com/users/348101/profile" target="_blank">
+          <img src="robloxbutton.png">
+        </a>
+      </div>
+
+      <div class="discord">
+        <a href="#" target="_blank">
+          <img src="discordbutton.png">
+        </a>
+      </div>
+
     </div>
 
   </div>

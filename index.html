@@ -27,11 +27,11 @@
       z-index: -2;
     }
 
-    /* lighter overlay (more transparent background overall) */
+    /* DARKER + SOFT 85% FEEL */
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.20);
+      background: rgba(0,0,0,0.78);
       z-index: -1;
     }
 
@@ -74,7 +74,7 @@
       transform: translateY(0);
     }
 
-    /* PROFILE CARD (now matches view counter) */
+    /* PROFILE CARD */
     .card {
       position: relative;
       overflow: hidden;
@@ -92,8 +92,7 @@
 
       backdrop-filter: blur(6px);
 
-      box-shadow:
-        0 0 25px rgba(0,0,0,0.25);
+      box-shadow: 0 0 25px rgba(0,0,0,0.25);
 
       animation: float 6s ease-in-out infinite;
     }
@@ -213,7 +212,7 @@
       opacity: 1;
     }
 
-    /* VIEW COUNTER (same style as card) */
+    /* VIEW COUNTER */
     .view-counter {
       display: flex;
       align-items: center;

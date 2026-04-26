@@ -18,6 +18,7 @@
       color: white;
     }
 
+    /* BACKGROUND */
     .bg {
       position: fixed;
       inset: 0;
@@ -34,6 +35,7 @@
       z-index: -3;
     }
 
+    /* FOG */
     .fog {
       position: fixed;
       inset: 0;
@@ -56,6 +58,7 @@
       100% { transform: translate(0px, 0px); }
     }
 
+    /* 🌧 LEFT + RIGHT PARTICLES */
     .rain-side {
       position: fixed;
       top: 0;
@@ -80,32 +83,45 @@
     }
 
     @keyframes fall {
-      0% { transform: translateY(-20px); opacity: 0; }
+      0% {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
       10% { opacity: 0.7; }
-      100% { transform: translateY(110vh); opacity: 0; }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
     }
 
+    /* INTRO */
     .intro {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.92);
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       z-index: 100;
+
       cursor: pointer;
       font-size: 1.4rem;
       color: rgba(255,255,255,0.75);
+
       transition: opacity 1.2s ease;
     }
 
     .intro.fade-out { opacity: 0; }
 
+    /* MAIN */
     #content {
       opacity: 0;
       filter: blur(12px);
       transform: translateY(10px);
       transition: 1.2s ease;
+
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -117,19 +133,28 @@
       transform: translateY(0);
     }
 
-    /* VIEW COUNTER (RESTORED) */
+    /* VIEW COUNTER (slightly UP) */
     .view-counter {
       display: flex;
       align-items: center;
       gap: 8px;
+
       margin-bottom: 18px;
+
       padding: 6px 10px;
       border-radius: 16px;
+
       background: rgba(0,0,0,0.10);
       border: 1px solid rgba(255, 170, 210, 0.45);
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 14px rgba(255,255,255,0.08);
+
       backdrop-filter: blur(12px);
-      font-size: 0.85rem;
+
       color: rgba(255,255,255,0.75);
+      font-size: 0.85rem;
     }
 
     .view-counter img {
@@ -137,6 +162,7 @@
       height: 16px;
     }
 
+    /* CARD */
     .card {
       display: flex;
       flex-direction: column;
@@ -147,6 +173,7 @@
       border-radius: 38px;
 
       background: rgba(0,0,0,0.12);
+
       border: 1px solid rgba(255, 170, 210, 0.50);
 
       box-shadow:
@@ -155,6 +182,7 @@
         0 0 18px rgba(255, 170, 210, 0.10);
 
       backdrop-filter: blur(14px);
+
       animation: float 6s ease-in-out infinite;
     }
 
@@ -164,6 +192,7 @@
       100% { transform: translateY(0px); }
     }
 
+    /* PFP */
     .pfp-wrap {
       position: relative;
       width: 95px;
@@ -173,11 +202,50 @@
       justify-content: center;
     }
 
+    .pfp-wrap::after {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: 50%;
+
+      border: 1px solid rgba(255, 170, 210, 0.55);
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 14px rgba(255,255,255,0.10),
+        0 0 16px rgba(255, 170, 210, 0.20);
+
+      animation: ringSpin 10s linear infinite;
+    }
+
+    @keyframes ringSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     .profile-pic {
       width: 95px;
       height: 95px;
       border-radius: 50%;
       object-fit: cover;
+    }
+
+    .profile-row {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .name-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .name {
@@ -192,34 +260,107 @@
       50%{opacity:0;}
     }
 
-    .links img {
-      width: 34px;
-      height: 34px;
+    .badge img { width: 20px; }
+
+    .handle { color: rgba(255,255,255,0.75); }
+
+    /* BUTTONS */
+    .links {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .roblox img,
+    .discord img {
+      width: 30px;
       border-radius: 10px;
-      padding: 3px;
+      padding: 4px;
+
       border: 1px solid rgba(255, 170, 210, 0.45);
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 10px rgba(255,255,255,0.08);
+
       transition: 0.2s;
     }
 
-    .links img:hover {
-      transform: scale(1.12);
+    .roblox img:hover,
+    .discord img:hover {
+      transform: scale(1.15);
     }
 
-    /* VOLUME (RESTORED) */
+    .discord { position: relative; z-index: 9999; }
+
+    .discord::after {
+      content: "discord .nighty_";
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+
+      background: rgba(0,0,0,0.45);
+      padding: 3px 7px;
+      border-radius: 6px;
+
+      opacity: 0;
+      transition: 0.2s;
+    }
+
+    .discord:hover::after {
+      opacity: 1;
+    }
+
+    /* VOLUME (slightly LOWER) */
     .volume-wrap {
       display: flex;
       align-items: center;
       gap: 6px;
+
       margin-top: 22px;
+
       padding: 6px 10px;
       border-radius: 14px;
+
       background: rgba(0,0,0,0.10);
+
       border: 1px solid rgba(255, 170, 210, 0.45);
+
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.18),
+        0 0 12px rgba(255,255,255,0.08);
+
       backdrop-filter: blur(12px);
+    }
+
+    .volume-wrap img {
+      width: 12px;
+      height: 12px;
+      filter: brightness(0) invert(1);
     }
 
     input[type="range"] {
       width: 70px;
+      height: 2px;
+
+      appearance: none;
+      background: rgba(255, 170, 210, 0.4);
+      border-radius: 999px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffd1e8;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -230,6 +371,7 @@
 <div class="overlay"></div>
 <div class="fog"></div>
 
+<!-- 🌧 SIDE RAIN -->
 <div class="rain-side left" id="leftRain"></div>
 <div class="rain-side right" id="rightRain"></div>
 
@@ -239,7 +381,6 @@
 
 <div id="content">
 
-  <!-- VIEW COUNTER BACK -->
   <div class="view-counter">
     <img src="assets/viewcounter.png">
     <span>[DISABLED]</span>
@@ -247,53 +388,74 @@
 
   <div class="card">
 
-    <div class="pfp-wrap">
-      <img src="assets/pfp.png" class="profile-pic">
-    </div>
-
-    <div>
-      <div style="display:flex; align-items:center; gap:10px;">
-        <div id="typedName" class="name"></div>
-        <span class="cursor">|</span>
+    <div class="profile-row">
+      <div class="pfp-wrap">
+        <img src="assets/pfp.png" class="profile-pic">
       </div>
-      <div style="opacity:0.7;">.nighty_</div>
+
+      <div class="info">
+        <div class="name-line">
+          <div id="typedName" class="name"></div>
+          <span class="cursor">|</span>
+          <div class="badge">
+            <img src="assets/badge1.gif">
+          </div>
+        </div>
+
+        <div class="handle">.nighty_</div>
+      </div>
     </div>
 
     <div class="links">
-      <a href="#"><img src="assets/robloxbutton.png"></a>
-      <a href="#"><img src="assets/discordbutton.png"></a>
+      <div class="roblox">
+        <a href="https://www.roblox.com/users/348101/profile" target="_blank">
+          <img src="assets/robloxbutton.png">
+        </a>
+      </div>
+
+      <div class="discord">
+        <a href="#"><img src="assets/discordbutton.png"></a>
+      </div>
     </div>
 
   </div>
 
-  <!-- VOLUME SLIDER BACK -->
-  <div class="volume-wrap">
+  <div class="volume-wrap hidden" id="volume">
     <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
-    <input type="range" min="0" max="1" step="0.01" value="0.05"
-      oninput="document.getElementById('rain').volume = this.value">
+    <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="setVolume(this.value)">
   </div>
 
 </div>
 
 <script>
 const rain = document.getElementById("rain");
+const volumeUI = document.getElementById("volume");
+
+function setVolume(v) {
+  rain.volume = v;
+}
 
 function spawnRain(container) {
   for (let i = 0; i < 25; i++) {
-    const d = document.createElement("div");
-    d.className = "drop";
-    d.style.left = Math.random() * 100 + "px";
-    d.style.animationDuration = (0.8 + Math.random()) + "s";
-    container.appendChild(d);
+    const drop = document.createElement("div");
+    drop.className = "drop";
+
+    drop.style.left = Math.random() * 100 + "px";
+    drop.style.animationDuration = (0.8 + Math.random() * 1.2) + "s";
+    drop.style.opacity = Math.random() * 0.6;
+
+    container.appendChild(drop);
   }
 }
 
-spawnRain(leftRain);
-spawnRain(rightRain);
+spawnRain(document.getElementById("leftRain"));
+spawnRain(document.getElementById("rightRain"));
 
 function enterSite() {
   document.querySelector(".intro").classList.add("fade-out");
   document.getElementById("content").classList.add("visible");
+
+  volumeUI.classList.remove("hidden");
 
   rain.volume = 0.05;
   rain.play();
@@ -305,19 +467,20 @@ function enterSite() {
   animateName();
 }
 
+/* TYPEWRITER */
 const nameText = "Angel";
 let ni = 0;
-let forward = true;
+let nForward = true;
 
 function animateName() {
   const el = document.getElementById("typedName");
 
-  if (forward) {
+  if (nForward) {
     ni++;
     el.textContent = nameText.substring(0, ni);
 
     if (ni === nameText.length) {
-      forward = false;
+      nForward = false;
       setTimeout(animateName, 1200);
       return;
     }
@@ -326,7 +489,7 @@ function animateName() {
     el.textContent = nameText.substring(0, ni);
 
     if (ni === 1) {
-      forward = true;
+      nForward = true;
       setTimeout(animateName, 900);
       return;
     }

@@ -101,7 +101,7 @@
 
     .intro.fade-out { opacity: 0; }
 
-    /* MAIN */
+    /* MAIN WRAPPER */
     #content {
       opacity: 0;
       filter: blur(12px);
@@ -110,6 +110,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 18px;
     }
 
     #content.visible {
@@ -118,30 +119,29 @@
       transform: translateY(0);
     }
 
-    /* VIEW COUNTER (FIXED FRAME) */
+    /* 🔷 VIEW COUNTER FRAME (separate box) */
     .view-counter {
       display: flex;
       align-items: center;
       gap: 8px;
 
-      margin-bottom: 18px;
       padding: 6px 10px;
-      border-radius: 16px;
+      border-radius: 14px;
 
-      background: rgba(0,0,0,0.08);
-      border: 1px solid rgba(255, 170, 210, 0.35);
+      background: rgba(0,0,0,0.15);
+      border: 1px solid rgba(255, 170, 210, 0.45);
 
       box-shadow:
-        0 0 8px rgba(0,0,0,0.25),
-        inset 0 0 8px rgba(255,255,255,0.04);
+        0 0 10px rgba(0,0,0,0.4),
+        0 0 14px rgba(255, 170, 210, 0.12);
 
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
 
-      color: rgba(255,255,255,0.75);
       font-size: 0.85rem;
+      color: rgba(255,255,255,0.75);
     }
 
-    /* CARD (FIXED FRAME) */
+    /* 🔷 MAIN CARD FRAME (center) */
     .card {
       display: flex;
       flex-direction: column;
@@ -151,14 +151,14 @@
       padding: 24px 36px;
       border-radius: 38px;
 
-      background: rgba(0,0,0,0.07);
-      border: 1px solid rgba(255, 170, 210, 0.38);
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(255, 170, 210, 0.55);
 
       box-shadow:
-        0 0 12px rgba(0,0,0,0.25),
-        inset 0 0 10px rgba(255,255,255,0.04);
+        0 0 18px rgba(0,0,0,0.45),
+        0 0 18px rgba(255, 170, 210, 0.18);
 
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(16px);
 
       animation: float 6s ease-in-out infinite;
     }
@@ -169,37 +169,55 @@
       100% { transform: translateY(0px); }
     }
 
-    /* NAME */
-    .name {
-      font-size: 2rem;
-      font-weight: 900;
+    /* PFP */
+    .pfp-wrap {
+      position: relative;
+      width: 95px;
+      height: 95px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .cursor { animation: blink 1s infinite; }
-
-    @keyframes blink {
-      0%,100%{opacity:1;}
-      50%{opacity:0;}
+    .pfp-wrap::after {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 170, 210, 0.55);
+      box-shadow: 0 0 14px rgba(255, 170, 210, 0.25);
+      animation: ringSpin 10s linear infinite;
     }
 
-    /* VOLUME (FIXED FRAME) */
+    @keyframes ringSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .profile-pic {
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* 🔷 VOLUME FRAME (separate bottom box) */
     .volume-wrap {
       display: flex;
       align-items: center;
       gap: 6px;
 
-      margin-top: 22px;
       padding: 6px 10px;
       border-radius: 14px;
 
-      background: rgba(0,0,0,0.08);
-      border: 1px solid rgba(255, 170, 210, 0.35);
+      background: rgba(0,0,0,0.15);
+      border: 1px solid rgba(255, 170, 210, 0.45);
 
       box-shadow:
-        0 0 8px rgba(0,0,0,0.25),
-        inset 0 0 8px rgba(255,255,255,0.04);
+        0 0 10px rgba(0,0,0,0.4),
+        0 0 12px rgba(255, 170, 210, 0.12);
 
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
     }
 
     input[type="range"] {
@@ -222,6 +240,18 @@
       opacity: 0;
       pointer-events: none;
     }
+
+    .name {
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .cursor { animation: blink 1s infinite; }
+
+    @keyframes blink {
+      0%,100%{opacity:1;}
+      50%{opacity:0;}
+    }
   </style>
 </head>
 
@@ -240,11 +270,13 @@
 
 <div id="content">
 
+  <!-- COUNTER FRAME -->
   <div class="view-counter">
     <img src="viewcounter.png">
     <span>[DISABLED]</span>
   </div>
 
+  <!-- MAIN FRAME -->
   <div class="card">
 
     <div class="name">Angel</div>
@@ -252,6 +284,7 @@
 
   </div>
 
+  <!-- VOLUME FRAME -->
   <div class="volume-wrap hidden" id="volume">
     <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
     <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="setVolume(this.value)">
@@ -281,7 +314,7 @@ function spawnRain(container) {
 spawnRain(document.getElementById("leftRain"));
 spawnRain(document.getElementById("rightRain"));
 
-/* TITLE ANIMATION */
+/* TITLE */
 const titleText = "Nighty's Bio";
 let ti = 0;
 

@@ -98,63 +98,31 @@
       transform: translateY(0);
     }
 
-    /* VOLUME */
-    .volume-wrap {
-      position: fixed;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-
+    /* VIEW COUNTER (TOP) */
+    .view-counter {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
 
-      padding: 4px 8px;
-      border-radius: 10px;
+      margin-bottom: 12px;
+
+      padding: 6px 10px;
+      border-radius: 12px;
 
       background: rgba(0,0,0,0.25);
       border: 1px solid rgba(255, 170, 210, 0.45);
 
+      color: rgba(255,255,255,0.75);
+      font-size: 0.85rem;
       backdrop-filter: blur(6px);
-
-      z-index: 80;
     }
 
-    .volume-wrap img {
-      width: 12px;
-      height: 12px;
-      filter: brightness(0) invert(1);
-      opacity: 0.9;
+    .view-counter img {
+      width: 16px;
+      height: 16px;
     }
 
-    input[type="range"] {
-      width: 70px;
-      height: 2px;
-
-      appearance: none;
-      background: rgba(255, 170, 210, 0.4);
-      border-radius: 999px;
-      outline: none;
-      cursor: pointer;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-      appearance: none;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ffd1e8;
-    }
-
-    input[type="range"]::-moz-range-thumb {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ffd1e8;
-      border: none;
-    }
-
-    /* CARD (more circular + unified pink outline) */
+    /* CARD */
     .card {
       display: flex;
       flex-direction: column;
@@ -171,6 +139,11 @@
       backdrop-filter: blur(6px);
 
       animation: float 6s ease-in-out infinite;
+
+      /* 💗 soft pink glow */
+      box-shadow:
+        0 0 12px rgba(255, 170, 210, 0.15),
+        0 0 30px rgba(255, 170, 210, 0.10);
     }
 
     @keyframes float {
@@ -179,7 +152,7 @@
       100% { transform: translateY(0px); }
     }
 
-    /* PFP WRAPPER + PINK RING */
+    /* PFP */
     .pfp-wrap {
       position: relative;
       width: 95px;
@@ -219,7 +192,7 @@
       animation: glowPulse 4s ease-in-out infinite;
     }
 
-    /* softer pink glow */
+    /* pink glow */
     @keyframes glowPulse {
       0%, 100% {
         box-shadow:
@@ -318,27 +291,55 @@
       opacity: 1;
     }
 
-    /* VIEW COUNTER (same pink outline) */
-    .view-counter {
+    /* VOLUME (BOTTOM) */
+    .volume-wrap {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+
       margin-top: 14px;
 
-      padding: 6px 10px;
-      border-radius: 12px;
+      padding: 4px 8px;
+      border-radius: 10px;
 
       background: rgba(0,0,0,0.25);
       border: 1px solid rgba(255, 170, 210, 0.45);
 
-      color: rgba(255,255,255,0.75);
-      font-size: 0.85rem;
       backdrop-filter: blur(6px);
     }
 
-    .view-counter img {
-      width: 16px;
-      height: 16px;
+    .volume-wrap img {
+      width: 12px;
+      height: 12px;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    input[type="range"] {
+      width: 70px;
+      height: 2px;
+
+      appearance: none;
+      background: rgba(255, 170, 210, 0.4);
+      border-radius: 999px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffd1e8;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffd1e8;
+      border: none;
     }
 
     .hidden {
@@ -358,12 +359,12 @@
 
 <audio id="rain" src="rain.mp3" loop></audio>
 
-<div class="volume-wrap hidden" id="volume">
-  <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
-  <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="setVolume(this.value)">
-</div>
-
 <div id="content">
+
+  <div class="view-counter">
+    <img src="viewcounter.png">
+    <span>[DISABLED]</span>
+  </div>
 
   <div class="card">
 
@@ -401,9 +402,9 @@
 
   </div>
 
-  <div class="view-counter">
-    <img src="viewcounter.png">
-    <span>[DISABLED]</span>
+  <div class="volume-wrap hidden" id="volume">
+    <img src="https://cdn-icons-png.flaticon.com/512/727/727269.png">
+    <input type="range" min="0" max="1" step="0.01" value="0.05" oninput="setVolume(this.value)">
   </div>
 
 </div>
@@ -422,7 +423,7 @@ function enterSite() {
 
   volumeUI.classList.remove("hidden");
 
-  rain.volume = 0.05; // 🔊 slightly louder than before
+  rain.volume = 0.05;
   rain.play();
 
   setTimeout(() => {

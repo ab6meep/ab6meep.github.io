@@ -5,7 +5,7 @@
 
   <link rel="icon" href="icon.png" type="image/png">
 
-  <!-- FIXED FONT (not bold anymore) -->
+  <!-- FONT (normal weight) -->
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap" rel="stylesheet">
 
   <style>
@@ -21,7 +21,6 @@
       text-align: left;
     }
 
-    /* BACKGROUND */
     .bg {
       position: fixed;
       inset: 0;
@@ -38,7 +37,6 @@
       z-index: -1;
     }
 
-    /* INTRO */
     .intro {
       position: fixed;
       inset: 0;
@@ -49,7 +47,7 @@
       z-index: 10;
       cursor: pointer;
       font-size: 2rem;
-      font-weight: 400; /* NOT BOLD */
+      font-weight: 400;
       text-shadow: 0 0 10px white;
       transition: opacity 1.2s ease;
     }
@@ -58,7 +56,6 @@
       opacity: 0;
     }
 
-    /* CONTENT */
     #content {
       opacity: 0;
       filter: blur(12px);
@@ -76,34 +73,38 @@
       transform: translateY(0);
     }
 
-    /* PROFILE ROW */
     .profile-row {
       display: flex;
       align-items: center;
       gap: 16px;
     }
 
-    /* STRONGER WHITE GLOW */
+    /* UPDATED PFP */
     .profile-pic {
       width: 95px;
       height: 95px;
       border-radius: 50%;
       object-fit: cover;
+
+      border: 2px solid rgba(255,255,255,0.85);
+
       box-shadow:
-        0 0 12px rgba(255,255,255,0.6),
-        0 0 25px rgba(255,255,255,0.45),
-        0 0 45px rgba(255,255,255,0.25);
+        0 0 20px rgba(255,255,255,0.9),
+        0 0 40px rgba(255,255,255,0.7),
+        0 0 70px rgba(255,255,255,0.45),
+        0 0 110px rgba(255,255,255,0.25);
+
       transition: 0.3s ease;
     }
 
     .profile-pic:hover {
       box-shadow:
-        0 0 18px rgba(255,255,255,0.9),
-        0 0 35px rgba(255,255,255,0.7),
-        0 0 60px rgba(255,255,255,0.4);
+        0 0 25px rgba(255,255,255,1),
+        0 0 55px rgba(255,255,255,0.85),
+        0 0 95px rgba(255,255,255,0.6),
+        0 0 140px rgba(255,255,255,0.35);
     }
 
-    /* INFO */
     .info {
       display: flex;
       flex-direction: column;
@@ -234,7 +235,7 @@
       }
     }
 
-    /* FIXED TITLE ANIMATION */
+    /* TITLE ANIMATION (1s per letter) */
     const text = "@Nighty.wtf";
     let i = 1;
     let forward = true;
@@ -246,7 +247,7 @@
 
         if (i === text.length) {
           forward = false;
-          setTimeout(animateTitle, 800);
+          setTimeout(animateTitle, 1000);
           return;
         }
       } else {
@@ -255,12 +256,12 @@
 
         if (i === 1) {
           forward = true;
-          setTimeout(animateTitle, 800);
+          setTimeout(animateTitle, 1000);
           return;
         }
       }
 
-      setTimeout(animateTitle, 120);
+      setTimeout(animateTitle, 1000);
     }
 
     animateTitle();

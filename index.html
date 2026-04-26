@@ -18,6 +18,7 @@
       color: white;
     }
 
+    /* BACKGROUND */
     .bg {
       position: fixed;
       inset: 0;
@@ -30,10 +31,11 @@
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.72); /* lighter */
+      background: rgba(0,0,0,0.75);
       z-index: -3;
     }
 
+    /* FOG */
     .fog {
       position: fixed;
       inset: 0;
@@ -56,6 +58,7 @@
       100% { transform: translate(0px, 0px); }
     }
 
+    /* RAIN */
     .rain-side {
       position: fixed;
       top: 0;
@@ -85,10 +88,11 @@
       100% { transform: translateY(110vh); opacity: 0; }
     }
 
+    /* INTRO */
     .intro {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.88); /* lighter */
+      background: rgba(0,0,0,0.88);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -101,11 +105,13 @@
 
     .intro.fade-out { opacity: 0; }
 
+    /* MAIN */
     #content {
       opacity: 0;
       filter: blur(12px);
       transform: translateY(10px);
       transition: 1.2s ease;
+
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -117,26 +123,31 @@
       transform: translateY(0);
     }
 
+    /* VIEW COUNTER */
     .view-counter {
       display: flex;
       align-items: center;
       gap: 8px;
+
       margin-bottom: 18px;
       padding: 6px 10px;
       border-radius: 16px;
 
-      background: rgba(0,0,0,0.06); /* lighter */
+      background: rgba(0,0,0,0.08);
 
       border: 1px solid rgba(255, 170, 210, 0.45);
+
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.14),
         0 0 14px rgba(255,255,255,0.06);
 
       backdrop-filter: blur(12px);
+
       color: rgba(255,255,255,0.75);
       font-size: 0.85rem;
     }
 
+    /* CARD */
     .card {
       display: flex;
       flex-direction: column;
@@ -146,7 +157,7 @@
       padding: 24px 36px;
       border-radius: 38px;
 
-      background: rgba(0,0,0,0.08); /* lighter */
+      background: rgba(0,0,0,0.10);
 
       border: 1px solid rgba(255, 170, 210, 0.50);
 
@@ -166,24 +177,7 @@
       100% { transform: translateY(0px); }
     }
 
-    .pfp-wrap::after {
-      content: "";
-      position: absolute;
-      inset: -7px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 170, 210, 0.55);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.14),
-        0 0 14px rgba(255,255,255,0.08),
-        0 0 16px rgba(255, 170, 210, 0.20);
-      animation: ringSpin 10s linear infinite;
-    }
-
-    @keyframes ringSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
+    /* NAME */
     .name {
       font-size: 2rem;
       font-weight: 900;
@@ -200,8 +194,11 @@
       margin-top: 22px;
       padding: 6px 10px;
       border-radius: 14px;
-      background: rgba(0,0,0,0.06); /* lighter */
+
+      background: rgba(0,0,0,0.08);
+
       border: 1px solid rgba(255, 170, 210, 0.45);
+
       backdrop-filter: blur(12px);
     }
 
@@ -234,19 +231,8 @@
 
   <div class="card">
 
-    <div class="profile-row">
-      <div class="pfp-wrap">
-        <img src="pfp.png" class="profile-pic">
-      </div>
-
-      <div class="info">
-        <div class="name-line">
-          <div id="typedName" class="name"></div>
-          <span class="cursor">|</span>
-        </div>
-        <div class="handle">.nighty_</div>
-      </div>
-    </div>
+    <div class="name" id="typedName"></div>
+    <span class="cursor">|</span>
 
   </div>
 </div>
@@ -254,6 +240,7 @@
 <script>
 const rain = document.getElementById("rain");
 
+/* RAIN */
 function spawnRain(container) {
   for (let i = 0; i < 25; i++) {
     const drop = document.createElement("div");
@@ -267,7 +254,7 @@ function spawnRain(container) {
 spawnRain(document.getElementById("leftRain"));
 spawnRain(document.getElementById("rightRain"));
 
-/* NAME TYPE */
+/* NAME */
 const nameText = "Nighty";
 let ni = 0;
 let forward = true;
@@ -298,7 +285,7 @@ function animateName() {
   setTimeout(animateName, 220);
 }
 
-/* TITLE TYPE */
+/* TITLE ANIMATION */
 const titleText = "Nighty's Bio";
 let ti = 0;
 let tForward = true;
@@ -310,7 +297,7 @@ function animateTitle() {
 
     if (ti === titleText.length) {
       tForward = false;
-      setTimeout(animateTitle, 1000);
+      setTimeout(animateTitle, 1200);
       return;
     }
   } else {
@@ -319,12 +306,12 @@ function animateTitle() {
 
     if (ti === 1) {
       tForward = true;
-      setTimeout(animateTitle, 700);
+      setTimeout(animateTitle, 800);
       return;
     }
   }
 
-  setTimeout(animateTitle, 180);
+  setTimeout(animateTitle, 160);
 }
 
 function enterSite() {

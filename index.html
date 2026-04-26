@@ -63,7 +63,6 @@
       transform: translateY(0);
     }
 
-    /* CARD */
     .card {
       position: relative;
       overflow: hidden;
@@ -91,7 +90,6 @@
       100% { transform: translateY(0px); }
     }
 
-    /* SHINE */
     .card::before {
       content: "";
       position: absolute;
@@ -114,7 +112,6 @@
       gap: 22px;
     }
 
-    /* PFP GLOW PULSE */
     .profile-pic {
       width: 95px;
       height: 95px;
@@ -293,6 +290,7 @@ function animateTitle() {
   if (forward) {
     i++;
     document.title = text.substring(0, i);
+
     if (i === text.length) {
       forward = false;
       setTimeout(animateTitle, 1000);
@@ -301,17 +299,19 @@ function animateTitle() {
   } else {
     i--;
     document.title = text.substring(0, i);
+
     if (i === 1) {
       forward = true;
       setTimeout(animateTitle, 1000);
       return;
     }
   }
+
   setTimeout(animateTitle, 1000);
 }
 animateTitle();
 
-/* NAME TYPE LOOP */
+/* TYPEWRITER (STOPS AT "A") */
 const nameText = "Angel";
 let ni = 0;
 let nForward = true;
@@ -325,21 +325,21 @@ function animateName() {
 
     if (ni === nameText.length) {
       nForward = false;
-      setTimeout(animateName, 1800);
+      setTimeout(animateName, 1200);
       return;
     }
   } else {
     ni--;
     el.textContent = nameText.substring(0, ni);
 
-    if (ni === 0) {
+    if (ni === 1) {
       nForward = true;
-      setTimeout(animateName, 1000);
+      setTimeout(animateName, 900);
       return;
     }
   }
 
-  setTimeout(animateName, 260);
+  setTimeout(animateName, 220);
 }
 </script>
 

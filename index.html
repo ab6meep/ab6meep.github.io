@@ -48,8 +48,6 @@
       font-weight: 400;
       text-shadow: 0 0 10px white;
       transition: opacity 1.2s ease;
-
-      /* BUTTON OUTLINE */
       border: 1px solid rgba(255,255,255,0.25);
     }
 
@@ -74,8 +72,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 18px;
-      padding: 22px 28px;
+      gap: 22px;
+      padding: 22px 34px; /* slightly wider */
       border-radius: 18px;
       background: rgba(255,255,255,0.06);
       backdrop-filter: blur(10px);
@@ -88,7 +86,7 @@
     .profile-row {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 22px; /* more sideways spacing */
     }
 
     .profile-pic {
@@ -96,12 +94,15 @@
       height: 95px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid rgba(255,255,255,0.85);
+
+      /* REMOVED BORDER */
+
       box-shadow:
         0 0 20px rgba(255,255,255,0.9),
         0 0 40px rgba(255,255,255,0.7),
         0 0 70px rgba(255,255,255,0.45),
         0 0 110px rgba(255,255,255,0.25);
+
       transition: 0.3s ease;
     }
 
@@ -116,26 +117,23 @@
     .info {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
     }
 
     .name-line {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px; /* more spacing */
     }
 
     .name {
       font-size: 2rem;
       font-weight: 900;
-      text-shadow:
-        0 0 6px rgba(255,255,255,0.35),
-        0 0 12px rgba(255,255,255,0.25);
     }
 
     .cursor {
       display: inline-block;
-      margin-left: 2px;
+      margin-left: 3px;
       animation: blink 1s infinite;
     }
 
@@ -152,16 +150,16 @@
     .handle {
       font-size: 1rem;
       color: rgba(255,255,255,0.75);
+      letter-spacing: 0.5px;
     }
 
-    /* BUTTON OUTLINE ADDED */
     .roblox img {
       width: 38px;
       filter: drop-shadow(0 0 6px white);
       transition: 0.2s ease;
       border: 1px solid rgba(255,255,255,0.25);
       border-radius: 8px;
-      padding: 4px;
+      padding: 5px;
     }
 
     .roblox img:hover {
@@ -172,13 +170,11 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      padding: 8px 12px;
+      padding: 8px 14px;
       background: rgba(0,0,0,0.25);
       color: white;
       border-radius: 10px;
       display: none;
-
-      /* BUTTON OUTLINE */
       border: 1px solid rgba(255,255,255,0.25);
       cursor: pointer;
     }
@@ -243,7 +239,7 @@
         intro.style.display = "none";
       }, 1200);
 
-      startTyping(); // start name typing on enter
+      animateName();
     }
 
     function toggleAudio() {
@@ -259,7 +255,6 @@
       }
     }
 
-    /* TITLE ANIMATION */
     const text = "@Nighty.wtf";
     let i = 1;
     let forward = true;
@@ -286,20 +281,34 @@
     }
     animateTitle();
 
-    /* NAME TYPEWRITER */
     const nameText = "Angel";
     let ni = 0;
+    let nForward = true;
 
-    function startTyping() {
+    function animateName() {
       const el = document.getElementById("typedName");
-      function type() {
-        if (ni < nameText.length) {
-          el.textContent += nameText.charAt(ni);
-          ni++;
-          setTimeout(type, 120);
+
+      if (nForward) {
+        ni++;
+        el.textContent = nameText.substring(0, ni);
+
+        if (ni === nameText.length) {
+          nForward = false;
+          setTimeout(animateName, 1200);
+          return;
+        }
+      } else {
+        ni--;
+        el.textContent = nameText.substring(0, ni);
+
+        if (ni === 0) {
+          nForward = true;
+          setTimeout(animateName, 800);
+          return;
         }
       }
-      type();
+
+      setTimeout(animateName, 220);
     }
   </script>
 

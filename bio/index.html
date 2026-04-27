@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bio</title>
+  <title>@angel's bio</title>
   <style>
     :root {
       color-scheme: dark;
@@ -774,18 +774,18 @@
       timeTotal.textContent = formatTime(audio.duration);
     });
 
-    function createRainDrops(container, count) {
-      for (let i = 0; i < count; i += 1) {
-        const drop = document.createElement('div');
-        const sizeClass = Math.random() > 0.65 ? 'long' : '';
-        const speedClass = Math.random() > 0.5 ? 'fast' : 'slow';
-        drop.className = `drop ${sizeClass} ${speedClass}`.trim();
-        drop.style.left = `${Math.random() * 100}%`;
-        drop.style.animationDuration = `${0.7 + Math.random() * 0.9}s`;
-        drop.style.animationDelay = `${-Math.random() * 2}s`;
-        container.appendChild(drop);
-      }
-    }
+    // function createRainDrops(container, count) {
+    //   for (let i = 0; i < count; i += 1) {
+    //     const drop = document.createElement('div');
+    //     const sizeClass = Math.random() > 0.65 ? 'long' : '';
+    //     const speedClass = Math.random() > 0.5 ? 'fast' : 'slow';
+    //     drop.className = `drop ${sizeClass} ${speedClass}`.trim();
+    //     drop.style.left = `${Math.random() * 100}%`;
+    //     drop.style.animationDuration = `${0.7 + Math.random() * 0.9}s`;
+    //     drop.style.animationDelay = `${-Math.random() * 2}s`;
+    //     container.appendChild(drop);
+    //   }
+    // }
 
     // function initRain() {
     //   const leftColumn = document.querySelector('.rain-left');
@@ -795,7 +795,7 @@
     //   createRainDrops(rightColumn, 54);
     // }
 
-    initRain();
+    // initRain();
 
     progressBar.addEventListener('input', () => {
       if (audio.duration) {

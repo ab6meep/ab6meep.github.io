@@ -21,94 +21,63 @@ body {
 }
 
 body {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
-/* Blurred background image */
+/* Background Image */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     background: url("background.png") center center / cover no-repeat;
-    filter: blur(12px);
+    filter: blur(10px) brightness(0.5);
     transform: scale(1.1);
     z-index: -2;
 }
 
-/* Dark overlay */
+/* Dark Overlay */
 body::after {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.35);
     z-index: -1;
 }
 
 .container {
     text-align: center;
-    animation: fadeIn 1.5s ease;
+    animation: fadeIn 1.2s ease;
 }
 
 .title {
     color: white;
-    font-size: clamp(3rem, 8vw, 7rem);
-    font-weight: 800;
-    letter-spacing: 4px;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
     text-shadow:
-        0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 40px #fff,
-        0 0 80px #fff,
-        0 0 120px rgba(255,255,255,0.8);
-    animation: glow 2s ease-in-out infinite alternate;
+        0 0 5px rgba(255,255,255,0.9),
+        0 0 10px rgba(255,255,255,0.5),
+        0 0 20px rgba(255,255,255,0.3);
 }
 
 .heart {
-    margin-top: 20px;
+    margin-top: 12px;
     color: white;
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    font-weight: 500;
     text-shadow:
-        0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 40px #fff;
-    animation: pulse 1.5s infinite ease-in-out;
-}
-
-@keyframes glow {
-    from {
-        text-shadow:
-            0 0 10px #fff,
-            0 0 20px #fff,
-            0 0 40px #fff,
-            0 0 80px #fff;
-    }
-
-    to {
-        text-shadow:
-            0 0 20px #fff,
-            0 0 40px #fff,
-            0 0 80px #fff,
-            0 0 120px #fff,
-            0 0 160px #fff;
-    }
-}
-
-@keyframes pulse {
-    0%,100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.15);
-    }
+        0 0 5px rgba(255,255,255,0.8),
+        0 0 10px rgba(255,255,255,0.3);
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(15px);
+        transform: translateY(10px);
     }
     to {
         opacity: 1;

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel's Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            background: transparent;
+        }
+
+        #background {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        #start-screen {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 30;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        #start-text {
+            font-size: 24px;
+            color: #fff;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        @media (max-width: 430px) {
+            #start-text {
+                font-size: 18px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Retro+Gaming&display=swap" rel="stylesheet">
+</head>
+<body class="rain-theme" onload="initMedia()">
+    
+    <div id="start-screen">
+        <div id="start-text"></div>
+    </div>
+
+    <div class="container">
+        
+        <video id="background" autoplay loop muted playsinline webkit-playsinline>
+            <source src="assets/rain_background.mov" type="video/mp4">
+        </video>
+
+        
+        <div class="glitch-overlay"></div>
+        <div id="hacker-overlay" class="hidden"></div>
+        <div id="snow-overlay" class="hidden"></div>
+
+
+    </div>
+
+
+    <audio id="background-music" loop>
+        <source src="assets/background_music.mp3" type="audio/mp3">
+    </audio>
+    <audio id="hacker-music" loop muted>
+        <source src="assets/hacker_music.mp3" type="audio/mp3">
+    </audio>
+    <audio id="rain-music" loop muted>
+        <source src="assets/rain_music.mp3" type="audio/mp3">
+    </audio>
+    <audio id="anime-music" loop muted>
+        <source src="assets/anime_music.mp3" type="audio/mp3">
+    </audio>
+    <audio id="car-music" loop muted>
+        <source src="assets/car_music.mp3" type="audio/mp3">
+    </audio>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
